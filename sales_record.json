@@ -1,0 +1,2108 @@
+[
+    {
+        "order_id": "ORD-0001",
+        "item_name": "CPU",
+        "quantity": 7,
+        "price_per_unit": 420.56,
+        "total_price": 2943.92,
+        "order_date": "2024-11-26T00:06:20.014549",
+        "region": "South",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-9494",
+            "email": "customer1@example.com",
+            "age": 60,
+            "address": {
+                "street": "890 Main St",
+                "city": "Port Angela",
+                "zip": "21292"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0002",
+        "item_name": "CPU",
+        "quantity": 4,
+        "price_per_unit": 480.04,
+        "total_price": 1920.16,
+        "order_date": "2024-09-21T00:06:20.042647",
+        "region": "West",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-1298",
+            "email": "customer2@example.com",
+            "age": 42,
+            "address": {
+                "street": "262 Main St",
+                "city": "East Marthabury",
+                "zip": "86393"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0003",
+        "item_name": "Webcam",
+        "quantity": 10,
+        "price_per_unit": 273.96,
+        "total_price": 2739.6,
+        "order_date": "2024-12-06T00:06:20.043846",
+        "region": "South",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-1893",
+            "email": "customer3@example.com",
+            "age": 56,
+            "address": {
+                "street": "116 Main St",
+                "city": "Fisherland",
+                "zip": "52477"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0004",
+        "item_name": "Mouse",
+        "quantity": 6,
+        "price_per_unit": 1227.35,
+        "total_price": 7364.1,
+        "order_date": "2025-03-26T00:06:20.045176",
+        "region": "North",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-7609",
+            "email": "customer4@example.com",
+            "age": 32,
+            "address": {
+                "street": "355 Main St",
+                "city": "Lake Micheal",
+                "zip": "44558"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0005",
+        "item_name": "Laptop",
+        "quantity": 9,
+        "price_per_unit": 595.5,
+        "total_price": 5359.5,
+        "order_date": "2025-05-01T00:06:20.046352",
+        "region": "North",
+        "payment_method": "Crypto",
+        "customer_info": {
+            "customer_id": "CUST-9682",
+            "email": "customer5@example.com",
+            "age": 18,
+            "address": {
+                "street": "372 Main St",
+                "city": "East Angelachester",
+                "zip": "16647"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0006",
+        "item_name": "Keyboard",
+        "quantity": 1,
+        "price_per_unit": 127.75,
+        "total_price": 127.75,
+        "order_date": "2025-04-04T00:06:20.047492",
+        "region": "South",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-6165",
+            "email": "customer6@example.com",
+            "age": 58,
+            "address": {
+                "street": "119 Main St",
+                "city": "Staceyview",
+                "zip": "40343"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0007",
+        "item_name": "Mouse",
+        "quantity": 1,
+        "price_per_unit": 1075.58,
+        "total_price": 1075.58,
+        "order_date": "2025-03-07T00:06:20.048569",
+        "region": "South",
+        "payment_method": "Crypto",
+        "customer_info": {
+            "customer_id": "CUST-4133",
+            "email": "customer7@example.com",
+            "age": 39,
+            "address": {
+                "street": "726 Main St",
+                "city": "Ginafurt",
+                "zip": "24544"
+            }
+        },
+        "status": "Completed"
+    },
+    {
+        "order_id": "ORD-0008",
+        "item_name": "RAM",
+        "quantity": 9,
+        "price_per_unit": 910.43,
+        "total_price": 8193.87,
+        "order_date": "2025-03-28T00:06:20.049714",
+        "region": "Central",
+        "payment_method": "Crypto",
+        "customer_info": {
+            "customer_id": "CUST-4706",
+            "email": "customer8@example.com",
+            "age": 19,
+            "address": {
+                "street": "608 Main St",
+                "city": "Brandishire",
+                "zip": "31906"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0009",
+        "item_name": "Monitor",
+        "quantity": 5,
+        "price_per_unit": 837.49,
+        "total_price": 4187.45,
+        "order_date": "2025-05-15T00:06:20.050847",
+        "region": "South",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-1807",
+            "email": "customer9@example.com",
+            "age": null,
+            "address": {
+                "street": "59 Main St",
+                "city": "Troystad",
+                "zip": "20000"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0010",
+        "item_name": "RAM",
+        "quantity": 4,
+        "price_per_unit": 1258.22,
+        "total_price": 5032.88,
+        "order_date": "2024-12-19T00:06:20.051987",
+        "region": "West",
+        "payment_method": "Crypto",
+        "customer_info": {
+            "customer_id": "CUST-7547",
+            "email": "customer10@example.com",
+            "age": 26,
+            "address": {
+                "street": "363 Main St",
+                "city": "Mariashire",
+                "zip": "54894"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0011",
+        "item_name": "Keyboard",
+        "quantity": 5,
+        "price_per_unit": 115.0,
+        "total_price": 575.0,
+        "order_date": "2024-12-21T00:06:20.053157",
+        "region": "East",
+        "payment_method": "Crypto",
+        "customer_info": {
+            "customer_id": "CUST-7481",
+            "email": "customer11@example.com",
+            "age": 51,
+            "address": {
+                "street": "115 Main St",
+                "city": "East Norma",
+                "zip": "67284"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0012",
+        "item_name": "Keyboard",
+        "quantity": 3,
+        "price_per_unit": 1305.65,
+        "total_price": 3916.95,
+        "order_date": "2025-01-24T00:06:20.054295",
+        "region": "Central",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-9356",
+            "email": "customer12@example.com",
+            "age": null,
+            "address": {
+                "street": "198 Main St",
+                "city": "South Brianburgh",
+                "zip": "28855"
+            }
+        },
+        "status": "Completed"
+    },
+    {
+        "order_id": "ORD-0013",
+        "item_name": "Graphics Card",
+        "quantity": 8,
+        "price_per_unit": 746.87,
+        "total_price": 5974.96,
+        "order_date": "2025-06-01T00:06:20.055384",
+        "region": "West",
+        "payment_method": null,
+        "customer_info": {
+            "customer_id": "CUST-4804",
+            "email": "customer13@example.com",
+            "age": 59,
+            "address": {
+                "street": "144 Main St",
+                "city": "Christinaport",
+                "zip": "25071"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0014",
+        "item_name": "RAM",
+        "quantity": 9,
+        "price_per_unit": 343.1,
+        "total_price": 3087.9,
+        "order_date": "2025-07-02T00:06:20.056502",
+        "region": "South",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-8794",
+            "email": "customer14@example.com",
+            "age": 70,
+            "address": {
+                "street": "392 Main St",
+                "city": "North Melaniefurt",
+                "zip": "30841"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0015",
+        "item_name": "RAM",
+        "quantity": 7,
+        "price_per_unit": 466.15,
+        "total_price": 3263.05,
+        "order_date": "2024-09-22T00:06:20.057586",
+        "region": "West",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-4163",
+            "email": "customer15@example.com",
+            "age": 30,
+            "address": {
+                "street": "707 Main St",
+                "city": "East Melissa",
+                "zip": "75376"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0016",
+        "item_name": "Graphics Card",
+        "quantity": 5,
+        "price_per_unit": 434.37,
+        "total_price": 2171.85,
+        "order_date": "2024-09-10T00:06:20.058710",
+        "region": "East",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-9955",
+            "email": "customer16@example.com",
+            "age": 68,
+            "address": {
+                "street": "757 Main St",
+                "city": "Port Bryanhaven",
+                "zip": "78892"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0017",
+        "item_name": "Webcam",
+        "quantity": 8,
+        "price_per_unit": 130.96,
+        "total_price": 1047.68,
+        "order_date": "2025-03-15T00:06:20.059823",
+        "region": "North",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-3367",
+            "email": "customer17@example.com",
+            "age": null,
+            "address": {
+                "street": "628 Main St",
+                "city": "Penaview",
+                "zip": "67914"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0018",
+        "item_name": "Webcam",
+        "quantity": 6,
+        "price_per_unit": 757.36,
+        "total_price": "$4544.16",
+        "order_date": "2025-05-17T00:06:20.061029",
+        "region": "East",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-1524",
+            "email": "customer18@example.com",
+            "age": 53,
+            "address": {
+                "street": "470 Main St",
+                "city": "New Victoriahaven",
+                "zip": "46159"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0019",
+        "item_name": "RAM",
+        "quantity": "10",
+        "price_per_unit": 1293.03,
+        "total_price": 12930.3,
+        "order_date": "2024-10-23T00:06:20.062157",
+        "region": "Central",
+        "payment_method": "Crypto",
+        "customer_info": {
+            "customer_id": "CUST-9778",
+            "email": "customer19@example.com",
+            "age": 34,
+            "address": {
+                "street": "110 Main St",
+                "city": "Jamesside",
+                "zip": "72313"
+            }
+        },
+        "status": "Completed"
+    },
+    {
+        "order_id": "ORD-0020",
+        "item_name": "Laptop",
+        "quantity": 7,
+        "price_per_unit": 55.13,
+        "total_price": 385.91,
+        "order_date": "2025-02-01T00:06:20.063282",
+        "region": "East",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-6747",
+            "email": "customer20@example.com",
+            "age": 50,
+            "address": {
+                "street": "328 Main St",
+                "city": "Lake Kristen",
+                "zip": "67713"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0021",
+        "item_name": "Headphones",
+        "quantity": 2,
+        "price_per_unit": 859.3,
+        "total_price": 1718.6,
+        "order_date": "2025-01-21T00:06:20.064360",
+        "region": "East",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-4953",
+            "email": "customer21@example.com",
+            "age": 23,
+            "address": {
+                "street": "305 Main St",
+                "city": "Port Katherineview",
+                "zip": "94723"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0022",
+        "item_name": "Mouse",
+        "quantity": 5,
+        "price_per_unit": 863.37,
+        "total_price": 4316.85,
+        "order_date": "2025-04-11T00:06:20.066472",
+        "region": "Central",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-7769",
+            "email": "customer22@example.com",
+            "age": 59,
+            "address": {
+                "street": "700 Main St",
+                "city": "West Amber",
+                "zip": "48871"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0023",
+        "item_name": "SSD",
+        "quantity": 4,
+        "price_per_unit": 1020.69,
+        "total_price": 4082.76,
+        "order_date": "2025-04-17T00:06:20.067531",
+        "region": "South",
+        "payment_method": "Crypto",
+        "customer_info": {
+            "customer_id": "CUST-2899",
+            "email": "customer23@example.com",
+            "age": 56,
+            "address": {
+                "street": "971 Main St",
+                "city": "New Amy",
+                "zip": "56332"
+            }
+        },
+        "status": "Completed"
+    },
+    {
+        "order_id": "ORD-0024",
+        "item_name": "Mouse",
+        "quantity": 4,
+        "price_per_unit": 1085.24,
+        "total_price": 4340.96,
+        "order_date": "2024-11-26T00:06:20.068741",
+        "region": "West",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-1709",
+            "email": "customer24@example.com",
+            "age": 32,
+            "address": {
+                "street": "743 Main St",
+                "city": "Nicholasfort",
+                "zip": "75413"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0025",
+        "item_name": "Webcam",
+        "quantity": 6,
+        "price_per_unit": 1488.89,
+        "total_price": 8933.34,
+        "order_date": "2024-11-06T00:06:20.069786",
+        "region": "South",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-7011",
+            "email": "customer25@example.com",
+            "age": 20,
+            "address": {
+                "street": "52 Main St",
+                "city": "Angelaland",
+                "zip": "81028"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0026",
+        "item_name": "Laptop",
+        "quantity": 4,
+        "price_per_unit": 1301.59,
+        "total_price": 5206.36,
+        "order_date": "2024-12-21T00:06:20.070913",
+        "region": "Central",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-6162",
+            "email": "customer26@example.com",
+            "age": 23,
+            "address": {
+                "street": "693 Main St",
+                "city": "Lake Lisaborough",
+                "zip": "97597"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0027",
+        "item_name": "Laptop",
+        "quantity": 5,
+        "price_per_unit": 435.11,
+        "total_price": 2175.55,
+        "order_date": "2025-02-05T00:06:20.071969",
+        "region": "Central",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-7069",
+            "email": "customer27@example.com",
+            "age": 20,
+            "address": {
+                "street": "341 Main St",
+                "city": "Donaldburgh",
+                "zip": "69684"
+            }
+        },
+        "status": "Completed"
+    },
+    {
+        "order_id": "ORD-0028",
+        "item_name": "Webcam",
+        "quantity": 10,
+        "price_per_unit": 555.89,
+        "total_price": 5558.9,
+        "order_date": "2025-05-30T00:06:20.073119",
+        "region": "West",
+        "payment_method": "Crypto",
+        "customer_info": {
+            "customer_id": "CUST-7243",
+            "email": "customer28@example.com",
+            "age": 43,
+            "address": {
+                "street": "999 Main St",
+                "city": "Williamsbury",
+                "zip": "50206"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0029",
+        "item_name": "Headphones",
+        "quantity": 6,
+        "price_per_unit": 236.35,
+        "total_price": 1418.1,
+        "order_date": "2025-01-24T00:06:20.074221",
+        "region": "Central",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-6908",
+            "email": "customer29@example.com",
+            "age": 62,
+            "address": {
+                "street": "791 Main St",
+                "city": "West Frank",
+                "zip": "43192"
+            }
+        },
+        "status": "Completed"
+    },
+    {
+        "order_id": "ORD-0030",
+        "item_name": "Graphics Card",
+        "quantity": 3,
+        "price_per_unit": 1242.05,
+        "total_price": 3726.15,
+        "order_date": "2025-03-22T00:06:20.075311",
+        "region": "North",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-4614",
+            "email": "customer30@example.com",
+            "age": 52,
+            "address": {
+                "street": "819 Main St",
+                "city": "Rebeccaside",
+                "zip": "16648"
+            }
+        },
+        "status": "Completed"
+    },
+    {
+        "order_id": "ORD-0031",
+        "item_name": "Monitor",
+        "quantity": 9,
+        "price_per_unit": 341.53,
+        "total_price": 3073.77,
+        "order_date": "2025-02-26T00:06:20.076324",
+        "region": "Central",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-7422",
+            "email": "customer31@example.com",
+            "age": 66,
+            "address": {
+                "street": "634 Main St",
+                "city": "Emmamouth",
+                "zip": "17859"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0032",
+        "item_name": "RAM",
+        "quantity": 7,
+        "price_per_unit": 1241.24,
+        "total_price": 8688.68,
+        "order_date": "2025-03-09T00:06:20.077325",
+        "region": "South",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-5625",
+            "email": "customer32@example.com",
+            "age": 35,
+            "address": {
+                "street": "752 Main St",
+                "city": "North Jenniferberg",
+                "zip": "48242"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0033",
+        "item_name": "Keyboard",
+        "quantity": 9,
+        "price_per_unit": 910.02,
+        "total_price": 8190.18,
+        "order_date": "2024-08-30T00:06:20.078392",
+        "region": "West",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-6331",
+            "email": "customer33@example.com",
+            "age": 40,
+            "address": {
+                "street": "277 Main St",
+                "city": "Wardhaven",
+                "zip": "26638"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0034",
+        "item_name": "Graphics Card",
+        "quantity": 6,
+        "price_per_unit": 154.83,
+        "total_price": 928.98,
+        "order_date": "2025-04-02T00:06:20.079435",
+        "region": "South",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-1646",
+            "email": "customer34@example.com",
+            "age": 68,
+            "address": {
+                "street": "493 Main St",
+                "city": "New Kathyhaven",
+                "zip": "98356"
+            }
+        },
+        "status": "Completed"
+    },
+    {
+        "order_id": "ORD-0035",
+        "item_name": "Laptop",
+        "quantity": 10,
+        "price_per_unit": 1094.78,
+        "total_price": 10947.8,
+        "order_date": "2025-06-11T00:06:20.080488",
+        "region": "North",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-9809",
+            "email": "customer35@example.com",
+            "age": 27,
+            "address": {
+                "street": "986 Main St",
+                "city": "Perrymouth",
+                "zip": "54335"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0036",
+        "item_name": "SSD",
+        "quantity": "1",
+        "price_per_unit": 247.71,
+        "total_price": 247.71,
+        "order_date": "2024-10-03T00:06:20.081561",
+        "region": "West",
+        "payment_method": "Crypto",
+        "customer_info": {
+            "customer_id": "CUST-2667",
+            "email": "customer36@example.com",
+            "age": 54,
+            "address": {
+                "street": "114 Main St",
+                "city": "East Justin",
+                "zip": "37790"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0037",
+        "item_name": "Mouse",
+        "quantity": 8,
+        "price_per_unit": 365.85,
+        "total_price": 2926.8,
+        "order_date": "2024-08-12T00:06:20.082615",
+        "region": "East",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-5843",
+            "email": "customer37@example.com",
+            "age": 38,
+            "address": {
+                "street": "652 Main St",
+                "city": "Anthonybury",
+                "zip": "68042"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0038",
+        "item_name": "Keyboard",
+        "quantity": 4,
+        "price_per_unit": 513.18,
+        "total_price": 2052.72,
+        "order_date": "2025-05-17T00:06:20.083745",
+        "region": "Central",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-5564",
+            "email": "customer38@example.com",
+            "age": 37,
+            "address": {
+                "street": "100 Main St",
+                "city": "Elizabethton",
+                "zip": "38314"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0039",
+        "item_name": "Mouse",
+        "quantity": "4",
+        "price_per_unit": 1215.09,
+        "total_price": 4860.36,
+        "order_date": "2025-01-19T00:06:20.084855",
+        "region": "South",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-9384",
+            "email": "customer39@example.com",
+            "age": 30,
+            "address": {
+                "street": "88 Main St",
+                "city": "Lake Justin",
+                "zip": "20348"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0040",
+        "item_name": "SSD",
+        "quantity": 7,
+        "price_per_unit": 828.87,
+        "total_price": 5802.09,
+        "order_date": "2025-01-19T00:06:20.085889",
+        "region": "South",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-2922",
+            "email": "customer40@example.com",
+            "age": 29,
+            "address": {
+                "street": "282 Main St",
+                "city": "South Maryton",
+                "zip": "92220"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0041",
+        "item_name": "SSD",
+        "quantity": 9,
+        "price_per_unit": 1144.56,
+        "total_price": 10301.04,
+        "order_date": "2024-09-28T00:06:20.086963",
+        "region": "Central",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-7225",
+            "email": "customer41@example.com",
+            "age": 61,
+            "address": {
+                "street": "778 Main St",
+                "city": "Stephanieview",
+                "zip": "70123"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0042",
+        "item_name": "CPU",
+        "quantity": 6,
+        "price_per_unit": 575.0,
+        "total_price": 3450.0,
+        "order_date": "2025-03-30T00:06:20.087995",
+        "region": "North",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-1039",
+            "email": "customer42@example.com",
+            "age": 69,
+            "address": {
+                "street": "143 Main St",
+                "city": "East Jonathan",
+                "zip": "32684"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0043",
+        "item_name": "SSD",
+        "quantity": 10,
+        "price_per_unit": 373.64,
+        "total_price": 3736.4,
+        "order_date": "2025-03-09T00:06:20.089113",
+        "region": "West",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-1459",
+            "email": "customer43@example.com",
+            "age": 26,
+            "address": {
+                "street": "304 Main St",
+                "city": "Robertland",
+                "zip": "38676"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0044",
+        "item_name": "SSD",
+        "quantity": 10,
+        "price_per_unit": 1175.14,
+        "total_price": 11751.4,
+        "order_date": "2025-03-26T00:06:20.090201",
+        "region": "South",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-1030",
+            "email": "customer44@example.com",
+            "age": 26,
+            "address": {
+                "street": "703 Main St",
+                "city": "West Whitneyborough",
+                "zip": "47180"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0045",
+        "item_name": "Graphics Card",
+        "quantity": 2,
+        "price_per_unit": 120.53,
+        "total_price": 241.06,
+        "order_date": "2024-12-22T00:06:20.091369",
+        "region": "North",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-2485",
+            "email": "customer45@example.com",
+            "age": 24,
+            "address": {
+                "street": "862 Main St",
+                "city": "New Natashaville",
+                "zip": "35019"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0046",
+        "item_name": "Headphones",
+        "quantity": 8,
+        "price_per_unit": 443.09,
+        "total_price": 3544.72,
+        "order_date": "2025-03-30T00:06:20.092420",
+        "region": "Central",
+        "payment_method": "Crypto",
+        "customer_info": {
+            "customer_id": "CUST-7552",
+            "email": "customer46@example.com",
+            "age": 28,
+            "address": {
+                "street": "38 Main St",
+                "city": "Victoriaville",
+                "zip": "17444"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0047",
+        "item_name": "RAM",
+        "quantity": 7,
+        "price_per_unit": 1087.65,
+        "total_price": "$7613.55",
+        "order_date": "2024-12-24T00:06:20.094501",
+        "region": "Central",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-4824",
+            "email": "customer47@example.com",
+            "age": 47,
+            "address": {
+                "street": "617 Main St",
+                "city": "Tonyaside",
+                "zip": "47806"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0048",
+        "item_name": "Mouse",
+        "quantity": 7,
+        "price_per_unit": 629.49,
+        "total_price": 4406.43,
+        "order_date": "2024-10-22T00:06:20.095524",
+        "region": "West",
+        "payment_method": "Crypto",
+        "customer_info": {
+            "customer_id": "CUST-3509",
+            "email": "customer48@example.com",
+            "age": null,
+            "address": {
+                "street": "823 Main St",
+                "city": "Fordfort",
+                "zip": "58632"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0049",
+        "item_name": "Graphics Card",
+        "quantity": 4,
+        "price_per_unit": 915.15,
+        "total_price": 3660.6,
+        "order_date": "2025-05-10T00:06:20.096603",
+        "region": "West",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-7430",
+            "email": "customer49@example.com",
+            "age": 57,
+            "address": {
+                "street": "542 Main St",
+                "city": "Lake Maureen",
+                "zip": "71149"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0050",
+        "item_name": "CPU",
+        "quantity": 5,
+        "price_per_unit": 1492.75,
+        "total_price": 7463.75,
+        "order_date": "2024-11-14T00:06:20.097607",
+        "region": "Central",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-7224",
+            "email": "customer50@example.com",
+            "age": 22,
+            "address": {
+                "street": "570 Main St",
+                "city": "New Justin",
+                "zip": "57305"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0051",
+        "item_name": "CPU",
+        "quantity": 6,
+        "price_per_unit": 1053.56,
+        "total_price": 6321.36,
+        "order_date": "2025-04-23T00:06:20.098655",
+        "region": "West",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-6639",
+            "email": "customer51@example.com",
+            "age": 54,
+            "address": {
+                "street": "933 Main St",
+                "city": "Bryanmouth",
+                "zip": "97069"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0052",
+        "item_name": "Webcam",
+        "quantity": 2,
+        "price_per_unit": 298.59,
+        "total_price": 597.18,
+        "order_date": "2025-04-05T00:06:20.099663",
+        "region": "East",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-9790",
+            "email": "customer52@example.com",
+            "age": 37,
+            "address": {
+                "street": "834 Main St",
+                "city": "South Heidichester",
+                "zip": "11672"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0053",
+        "item_name": "Monitor",
+        "quantity": 2,
+        "price_per_unit": 475.58,
+        "total_price": 951.16,
+        "order_date": "2024-12-07T00:06:20.100723",
+        "region": "East",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-2643",
+            "email": "customer53@example.com",
+            "age": 33,
+            "address": {
+                "street": "319 Main St",
+                "city": "South Brandon",
+                "zip": "12848"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0054",
+        "item_name": "Laptop",
+        "quantity": 1,
+        "price_per_unit": 1090.9,
+        "total_price": 1090.9,
+        "order_date": "2025-03-06T00:06:20.101791",
+        "region": "South",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-6097",
+            "email": "customer54@example.com",
+            "age": null,
+            "address": {
+                "street": "658 Main St",
+                "city": "Port Samanthamouth",
+                "zip": "79002"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0055",
+        "item_name": "SSD",
+        "quantity": "5",
+        "price_per_unit": 1426.64,
+        "total_price": 7133.2,
+        "order_date": "2025-04-16T00:06:20.102888",
+        "region": "South",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-2414",
+            "email": "customer55@example.com",
+            "age": 29,
+            "address": {
+                "street": "942 Main St",
+                "city": "West Jessica",
+                "zip": "93773"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0056",
+        "item_name": "Monitor",
+        "quantity": 4,
+        "price_per_unit": 30.41,
+        "total_price": 121.64,
+        "order_date": "2025-05-30T00:06:20.103896",
+        "region": "Central",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-1250",
+            "email": "customer56@example.com",
+            "age": 55,
+            "address": {
+                "street": "319 Main St",
+                "city": "Port Amandaton",
+                "zip": "90593"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0057",
+        "item_name": "Laptop",
+        "quantity": 9,
+        "price_per_unit": 700.56,
+        "total_price": "$6305.04",
+        "order_date": "2025-05-08T00:06:20.104948",
+        "region": "South",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-9308",
+            "email": "customer57@example.com",
+            "age": 25,
+            "address": {
+                "street": "568 Main St",
+                "city": "Kimview",
+                "zip": "36706"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0058",
+        "item_name": "Graphics Card",
+        "quantity": 9,
+        "price_per_unit": 739.12,
+        "total_price": 6652.08,
+        "order_date": "2024-10-31T00:06:20.105989",
+        "region": "Central",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-3465",
+            "email": "customer58@example.com",
+            "age": null,
+            "address": {
+                "street": "822 Main St",
+                "city": "West Travis",
+                "zip": "60572"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0059",
+        "item_name": "Mouse",
+        "quantity": 6,
+        "price_per_unit": 1185.25,
+        "total_price": 7111.5,
+        "order_date": "2025-07-30T00:06:20.107040",
+        "region": "West",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-8781",
+            "email": "customer59@example.com",
+            "age": null,
+            "address": {
+                "street": "754 Main St",
+                "city": "North Sheilaview",
+                "zip": "28244"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0060",
+        "item_name": "Laptop",
+        "quantity": 9,
+        "price_per_unit": 699.98,
+        "total_price": 6299.82,
+        "order_date": "2025-07-16T00:06:20.108055",
+        "region": "North",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-5278",
+            "email": "customer60@example.com",
+            "age": 27,
+            "address": {
+                "street": "133 Main St",
+                "city": "Kellytown",
+                "zip": "48634"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0061",
+        "item_name": "Keyboard",
+        "quantity": 5,
+        "price_per_unit": 355.01,
+        "total_price": 1775.05,
+        "order_date": "2025-06-10T00:06:20.109175",
+        "region": "South",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-4948",
+            "email": "customer61@example.com",
+            "age": 53,
+            "address": {
+                "street": "184 Main St",
+                "city": "Lake Darrylview",
+                "zip": "24784"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0062",
+        "item_name": "Laptop",
+        "quantity": 9,
+        "price_per_unit": 313.21,
+        "total_price": 2818.89,
+        "order_date": "2024-09-06T00:06:20.110185",
+        "region": "East",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-4069",
+            "email": "customer62@example.com",
+            "age": 33,
+            "address": {
+                "street": "556 Main St",
+                "city": "Stevenstad",
+                "zip": "65211"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0063",
+        "item_name": "Mouse",
+        "quantity": 9,
+        "price_per_unit": 616.71,
+        "total_price": 5550.39,
+        "order_date": "2025-01-27T00:06:20.111270",
+        "region": "Central",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-4087",
+            "email": "customer63@example.com",
+            "age": 40,
+            "address": {
+                "street": "437 Main St",
+                "city": "South Sara",
+                "zip": "51529"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0064",
+        "item_name": "RAM",
+        "quantity": 1,
+        "price_per_unit": 153.14,
+        "total_price": 153.14,
+        "order_date": "2024-09-23T00:06:20.112321",
+        "region": "Central",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-5486",
+            "email": "customer64@example.com",
+            "age": 69,
+            "address": {
+                "street": "542 Main St",
+                "city": "Evelynland",
+                "zip": "43643"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0065",
+        "item_name": "Laptop",
+        "quantity": 9,
+        "price_per_unit": 937.25,
+        "total_price": 8435.25,
+        "order_date": "2025-07-31T00:06:20.113399",
+        "region": "North",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-4669",
+            "email": "customer65@example.com",
+            "age": 28,
+            "address": {
+                "street": "974 Main St",
+                "city": "Millerport",
+                "zip": "98832"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0066",
+        "item_name": "Mouse",
+        "quantity": 3,
+        "price_per_unit": 152.83,
+        "total_price": 458.49,
+        "order_date": "2024-10-18T00:06:20.114453",
+        "region": "West",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-6984",
+            "email": "customer66@example.com",
+            "age": 48,
+            "address": {
+                "street": "595 Main St",
+                "city": "New Douglashaven",
+                "zip": "50219"
+            }
+        },
+        "status": "Pending",
+        "notes": "Special handling required"
+    },
+    {
+        "order_id": "ORD-0067",
+        "item_name": "CPU",
+        "quantity": 8,
+        "price_per_unit": 346.34,
+        "total_price": 2770.72,
+        "order_date": "2024-10-16T00:06:20.115514",
+        "region": "South",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-8363",
+            "email": "customer67@example.com",
+            "age": 19,
+            "address": {
+                "street": "763 Main St",
+                "city": "Chandlerfort",
+                "zip": "37672"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0068",
+        "item_name": "RAM",
+        "quantity": 5,
+        "price_per_unit": 1306.45,
+        "total_price": 6532.25,
+        "order_date": "2025-02-19T00:06:20.116588",
+        "region": "East",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-9853",
+            "email": "customer68@example.com",
+            "age": 25,
+            "address": {
+                "street": "104 Main St",
+                "city": "New Amy",
+                "zip": "33964"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0069",
+        "item_name": "Headphones",
+        "quantity": 2,
+        "price_per_unit": 898.4,
+        "total_price": 1796.8,
+        "order_date": "2024-12-18T00:06:20.117711",
+        "region": "Central",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-9874",
+            "email": "customer69@example.com",
+            "age": 67,
+            "address": {
+                "street": "412 Main St",
+                "city": "East Amanda",
+                "zip": "39754"
+            }
+        },
+        "status": "Completed"
+    },
+    {
+        "order_id": "ORD-0070",
+        "item_name": "Laptop",
+        "quantity": 7,
+        "price_per_unit": 348.08,
+        "total_price": 2436.56,
+        "order_date": "2024-08-16T00:06:20.118748",
+        "region": "South",
+        "payment_method": null,
+        "customer_info": {
+            "customer_id": "CUST-3841",
+            "email": "customer70@example.com",
+            "age": null,
+            "address": {
+                "street": "817 Main St",
+                "city": "Jessebury",
+                "zip": "51575"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0071",
+        "item_name": "Webcam",
+        "quantity": 9,
+        "price_per_unit": 415.55,
+        "total_price": 3739.95,
+        "order_date": "2025-08-02T00:06:20.120865",
+        "region": "Central",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-9629",
+            "email": "customer71@example.com",
+            "age": 62,
+            "address": {
+                "street": "795 Main St",
+                "city": "Wigginsmouth",
+                "zip": "79962"
+            }
+        },
+        "status": "Completed"
+    },
+    {
+        "order_id": "ORD-0072",
+        "item_name": "Webcam",
+        "quantity": 2,
+        "price_per_unit": 272.1,
+        "total_price": 544.2,
+        "order_date": "2025-03-18T00:06:20.121971",
+        "region": "Central",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-5407",
+            "email": "customer72@example.com",
+            "age": 38,
+            "address": {
+                "street": "436 Main St",
+                "city": "West Katherine",
+                "zip": "89335"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0073",
+        "item_name": "Laptop",
+        "quantity": 8,
+        "price_per_unit": 207.5,
+        "total_price": 1660.0,
+        "order_date": "2025-06-11T00:06:20.123070",
+        "region": "West",
+        "payment_method": "Crypto",
+        "customer_info": {
+            "customer_id": "CUST-7711",
+            "email": "customer73@example.com",
+            "age": 53,
+            "address": {
+                "street": "219 Main St",
+                "city": "Port Frankberg",
+                "zip": "19851"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0074",
+        "item_name": "Headphones",
+        "quantity": 8,
+        "price_per_unit": 994.95,
+        "total_price": 7959.6,
+        "order_date": "2024-11-22T00:06:20.124144",
+        "region": "North",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-1800",
+            "email": "customer74@example.com",
+            "age": null,
+            "address": {
+                "street": "272 Main St",
+                "city": "Lake Cody",
+                "zip": "92928"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0075",
+        "item_name": "Mouse",
+        "quantity": 2,
+        "price_per_unit": 1169.27,
+        "total_price": 2338.54,
+        "order_date": "2025-05-06T00:06:20.125144",
+        "region": "Central",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-3272",
+            "email": "customer75@example.com",
+            "age": 51,
+            "address": {
+                "street": "711 Main St",
+                "city": "Fergusonberg",
+                "zip": "54290"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0076",
+        "item_name": "Keyboard",
+        "quantity": 6,
+        "price_per_unit": 461.27,
+        "total_price": 2767.62,
+        "order_date": "2025-01-14T00:06:20.126218",
+        "region": "West",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-1594",
+            "email": "customer76@example.com",
+            "age": 68,
+            "address": {
+                "street": "564 Main St",
+                "city": "Scottfort",
+                "zip": "42126"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0077",
+        "item_name": "Keyboard",
+        "quantity": "8",
+        "price_per_unit": 661.54,
+        "total_price": 5292.32,
+        "order_date": "2025-02-04T00:06:20.127228",
+        "region": "North",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-6631",
+            "email": "customer77@example.com",
+            "age": 51,
+            "address": {
+                "street": "64 Main St",
+                "city": "South Jefferyland",
+                "zip": "21876"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0078",
+        "item_name": "Laptop",
+        "quantity": 9,
+        "price_per_unit": 555.89,
+        "total_price": 5003.01,
+        "order_date": "2025-05-09T00:06:20.128279",
+        "region": "East",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-6195",
+            "email": "customer78@example.com",
+            "age": 31,
+            "address": {
+                "street": "876 Main St",
+                "city": "Jenniferside",
+                "zip": "25993"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0079",
+        "item_name": "Laptop",
+        "quantity": 3,
+        "price_per_unit": 505.77,
+        "total_price": 1517.31,
+        "order_date": "2024-08-28T00:06:20.129286",
+        "region": "North",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-4559",
+            "email": "customer79@example.com",
+            "age": 60,
+            "address": {
+                "street": "160 Main St",
+                "city": "Rickyfurt",
+                "zip": "45944"
+            }
+        },
+        "status": "Pending",
+        "notes": "Special handling required"
+    },
+    {
+        "order_id": "ORD-0080",
+        "item_name": "SSD",
+        "quantity": 2,
+        "price_per_unit": 719.02,
+        "total_price": 1438.04,
+        "order_date": "2025-06-07T00:06:20.130335",
+        "region": "East",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-7010",
+            "email": "customer80@example.com",
+            "age": 65,
+            "address": {
+                "street": "944 Main St",
+                "city": "North Raymondtown",
+                "zip": "44074"
+            }
+        },
+        "status": "Pending",
+        "notes": "Special handling required"
+    },
+    {
+        "order_id": "ORD-0081",
+        "item_name": "Monitor",
+        "quantity": 3,
+        "price_per_unit": 958.91,
+        "total_price": 2876.73,
+        "order_date": "2024-11-25T00:06:20.131395",
+        "region": "West",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-6594",
+            "email": "customer81@example.com",
+            "age": 64,
+            "address": {
+                "street": "101 Main St",
+                "city": "Port Joshuashire",
+                "zip": "92418"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0082",
+        "item_name": "Monitor",
+        "quantity": 2,
+        "price_per_unit": 762.07,
+        "total_price": 1524.14,
+        "order_date": "2024-11-04T00:06:20.132502",
+        "region": "South",
+        "payment_method": "Crypto",
+        "customer_info": {
+            "customer_id": "CUST-9095",
+            "email": "customer82@example.com",
+            "age": 41,
+            "address": {
+                "street": "191 Main St",
+                "city": "Port Mark",
+                "zip": "78650"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0083",
+        "item_name": "Mouse",
+        "quantity": 9,
+        "price_per_unit": 941.41,
+        "total_price": 8472.69,
+        "order_date": "2024-08-23T00:06:20.133542",
+        "region": "Central",
+        "payment_method": null,
+        "customer_info": {
+            "customer_id": "CUST-5115",
+            "email": "customer83@example.com",
+            "age": 62,
+            "address": {
+                "street": "247 Main St",
+                "city": "Padillaburgh",
+                "zip": "80184"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0084",
+        "item_name": "Webcam",
+        "quantity": 1,
+        "price_per_unit": 234.34,
+        "total_price": 234.34,
+        "order_date": "2025-04-09T00:06:20.134657",
+        "region": "East",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-5308",
+            "email": "customer84@example.com",
+            "age": 35,
+            "address": {
+                "street": "375 Main St",
+                "city": "Johnsonfort",
+                "zip": "76742"
+            }
+        },
+        "status": "Completed"
+    },
+    {
+        "order_id": "ORD-0085",
+        "item_name": "Monitor",
+        "quantity": 3,
+        "price_per_unit": 259.0,
+        "total_price": 777.0,
+        "order_date": "2024-08-24T00:06:20.135731",
+        "region": "South",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-6701",
+            "email": "customer85@example.com",
+            "age": 37,
+            "address": {
+                "street": "773 Main St",
+                "city": "Sullivanberg",
+                "zip": "74986"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0086",
+        "item_name": "Keyboard",
+        "quantity": 9,
+        "price_per_unit": 628.05,
+        "total_price": 5652.45,
+        "order_date": "2025-06-22T00:06:20.136854",
+        "region": "South",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-1408",
+            "email": "customer86@example.com",
+            "age": 67,
+            "address": {
+                "street": "444 Main St",
+                "city": "East Jaclynmouth",
+                "zip": "22616"
+            }
+        },
+        "status": "Completed"
+    },
+    {
+        "order_id": "ORD-0087",
+        "item_name": "Mouse",
+        "quantity": 8,
+        "price_per_unit": 490.25,
+        "total_price": 3922.0,
+        "order_date": "2025-04-30T00:06:20.137949",
+        "region": "North",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-6749",
+            "email": "customer87@example.com",
+            "age": 68,
+            "address": {
+                "street": "781 Main St",
+                "city": "Pamberg",
+                "zip": "28992"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0088",
+        "item_name": "CPU",
+        "quantity": 1,
+        "price_per_unit": 797.22,
+        "total_price": 797.22,
+        "order_date": "2025-01-30T00:06:20.139123",
+        "region": "West",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-9895",
+            "email": "customer88@example.com",
+            "age": 25,
+            "address": {
+                "street": "354 Main St",
+                "city": "Nguyenhaven",
+                "zip": "66509"
+            }
+        },
+        "status": "Completed",
+        "notes": "Special handling required"
+    },
+    {
+        "order_id": "ORD-0089",
+        "item_name": "Graphics Card",
+        "quantity": 10,
+        "price_per_unit": 78.18,
+        "total_price": 781.8,
+        "order_date": "2025-02-27T00:06:20.140231",
+        "region": "South",
+        "payment_method": "Crypto",
+        "customer_info": {
+            "customer_id": "CUST-1247",
+            "email": "customer89@example.com",
+            "age": 68,
+            "address": {
+                "street": "324 Main St",
+                "city": "Pattersonhaven",
+                "zip": "77309"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0090",
+        "item_name": "Headphones",
+        "quantity": 2,
+        "price_per_unit": 720.98,
+        "total_price": 1441.96,
+        "order_date": "2025-01-16T00:06:20.141367",
+        "region": "East",
+        "payment_method": "Crypto",
+        "customer_info": {
+            "customer_id": "CUST-1100",
+            "email": "customer90@example.com",
+            "age": 53,
+            "address": {
+                "street": "756 Main St",
+                "city": "North Veronicahaven",
+                "zip": "41888"
+            }
+        },
+        "status": "Pending",
+        "notes": "Special handling required"
+    },
+    {
+        "order_id": "ORD-0091",
+        "item_name": "Headphones",
+        "quantity": 3,
+        "price_per_unit": 1222.13,
+        "total_price": 3666.39,
+        "order_date": "2025-07-23T00:06:20.142472",
+        "region": "South",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-7045",
+            "email": "customer91@example.com",
+            "age": 60,
+            "address": {
+                "street": "288 Main St",
+                "city": "Destinyland",
+                "zip": "66971"
+            }
+        },
+        "status": "Pending",
+        "notes": "Special handling required"
+    },
+    {
+        "order_id": "ORD-0092",
+        "item_name": "SSD",
+        "quantity": 4,
+        "price_per_unit": 141.68,
+        "total_price": 566.72,
+        "order_date": "2025-01-04T00:06:20.143588",
+        "region": "South",
+        "payment_method": null,
+        "customer_info": {
+            "customer_id": "CUST-9752",
+            "email": "customer92@example.com",
+            "age": null,
+            "address": {
+                "street": "613 Main St",
+                "city": "Yvonneberg",
+                "zip": "98032"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0093",
+        "item_name": "Mouse",
+        "quantity": 9,
+        "price_per_unit": 91.1,
+        "total_price": 819.9,
+        "order_date": "2025-04-29T00:06:20.144591",
+        "region": "Central",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-3137",
+            "email": "customer93@example.com",
+            "age": 23,
+            "address": {
+                "street": "167 Main St",
+                "city": "North Bridget",
+                "zip": "13660"
+            }
+        },
+        "status": "Completed"
+    },
+    {
+        "order_id": "ORD-0094",
+        "item_name": "Laptop",
+        "quantity": 4,
+        "price_per_unit": 430.73,
+        "total_price": 1722.92,
+        "order_date": "2024-11-06T00:06:20.145643",
+        "region": "North",
+        "payment_method": "Cash",
+        "customer_info": {
+            "customer_id": "CUST-6389",
+            "email": "customer94@example.com",
+            "age": 29,
+            "address": {
+                "street": "958 Main St",
+                "city": "South Annaview",
+                "zip": "13992"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0095",
+        "item_name": "Keyboard",
+        "quantity": 3,
+        "price_per_unit": 817.22,
+        "total_price": 2451.66,
+        "order_date": "2025-04-23T00:06:20.146793",
+        "region": "East",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-9185",
+            "email": "customer95@example.com",
+            "age": 45,
+            "address": {
+                "street": "806 Main St",
+                "city": "Port Travisside",
+                "zip": "67193"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0096",
+        "item_name": "Headphones",
+        "quantity": 3,
+        "price_per_unit": 1229.45,
+        "total_price": 3688.35,
+        "order_date": "2025-02-05T00:06:20.148989",
+        "region": "East",
+        "payment_method": "Bank Transfer",
+        "customer_info": {
+            "customer_id": "CUST-3734",
+            "email": "customer96@example.com",
+            "age": 53,
+            "address": {
+                "street": "481 Main St",
+                "city": "Mirandamouth",
+                "zip": "79948"
+            }
+        },
+        "status": "Refunded"
+    },
+    {
+        "order_id": "ORD-0097",
+        "item_name": "Headphones",
+        "quantity": 9,
+        "price_per_unit": 1360.24,
+        "total_price": 12242.16,
+        "order_date": "2025-05-17T00:06:20.150060",
+        "region": "Central",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-9028",
+            "email": "customer97@example.com",
+            "age": 42,
+            "address": {
+                "street": "990 Main St",
+                "city": "Lake Ruthville",
+                "zip": "52310"
+            }
+        },
+        "status": "Cancelled"
+    },
+    {
+        "order_id": "ORD-0098",
+        "item_name": "CPU",
+        "quantity": 8,
+        "price_per_unit": 1399.21,
+        "total_price": 11193.68,
+        "order_date": "2025-07-19T00:06:20.151182",
+        "region": "East",
+        "payment_method": "Credit Card",
+        "customer_info": {
+            "customer_id": "CUST-2594",
+            "email": "customer98@example.com",
+            "age": 27,
+            "address": {
+                "street": "702 Main St",
+                "city": "South Kimberly",
+                "zip": "65149"
+            }
+        },
+        "status": "Pending"
+    },
+    {
+        "order_id": "ORD-0099",
+        "item_name": "Mouse",
+        "quantity": 2,
+        "price_per_unit": 291.26,
+        "total_price": 582.52,
+        "order_date": "2025-07-10T00:06:20.152270",
+        "region": "East",
+        "payment_method": null,
+        "customer_info": {
+            "customer_id": "CUST-7613",
+            "email": "customer99@example.com",
+            "age": 64,
+            "address": {
+                "street": "872 Main St",
+                "city": "Nguyenmouth",
+                "zip": "67091"
+            }
+        },
+        "status": "Completed"
+    },
+    {
+        "order_id": "ORD-0100",
+        "item_name": "Mouse",
+        "quantity": 10,
+        "price_per_unit": 1116.48,
+        "total_price": 11164.8,
+        "order_date": "2024-09-21T00:06:20.153421",
+        "region": "North",
+        "payment_method": "PayPal",
+        "customer_info": {
+            "customer_id": "CUST-4349",
+            "email": "customer100@example.com",
+            "age": 26,
+            "address": {
+                "street": "648 Main St",
+                "city": "Lake Kristenbury",
+                "zip": "38106"
+            }
+        },
+        "status": "Completed"
+    }
+]
