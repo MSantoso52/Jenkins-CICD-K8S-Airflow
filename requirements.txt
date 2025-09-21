@@ -1,0 +1,8 @@
+apache-airflow==3.0.2
+pandas==2.0.3
+sqlalchemy==2.0.15
+psycopg2-binary==2.9.7
+pytest==7.4.0
+pytest-mock==3.11.1
+pylint==3.0.1
+flake8==6.1.0
