@@ -45,11 +45,11 @@ pipeline {
                     // Additional static analysis
                     sh '''
                         echo "Running pylint on DAG..."
-                        python3 -m pip install --user pylint
+                        python3 -m pip install --user pylint --break-system-packages
                         pylint sales_elt_dag.py || true
                         
                         echo "Running flake8 for style checks..."
-                        python3 -m pip install --user flake8
+                        python3 -m pip install --user flake8 --break-system-packages
                         flake8 sales_elt_dag.py || true
                     '''
                     
