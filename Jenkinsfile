@@ -34,7 +34,7 @@ pipeline {
                     // Install Python dependencies
                     sh '''
                         python3 -m pip install --user --upgrade pip --break-system-packages
-                        python3 -m pip install --user pytest==7.4.0 apache-airflow==${AIRFLOW_VERSION} pandas==2.0.3 sqlalchemy==2.0.15 psycopg2-binary pytest-mock --break-system-packages
+                        python3 -m pip install --user pytest==7.4.0 apache-airflow==${AIRFLOW_VERSION} pandas==2.0.3 sqlalchemy psycopg2-binary pytest-mock --break-system-packages
                     '''
                     
                     // Run pytest with verbose output and stop on first failure
