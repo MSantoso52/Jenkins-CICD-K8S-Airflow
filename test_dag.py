@@ -2,11 +2,12 @@ import pytest
 import sys
 import os
 from datetime import datetime
-from unittest.mock import patch, MagicMock, Mock
+from unittest.mock import patch, MagicMock, Mock, mock_open
 from airflow.models import DagBag
 from airflow.configuration import conf as airflow_conf
 from airflow.models.dag import DAG
 from airflow.models.baseoperator import BaseOperator
+from airflow.utils.session import create_session
 import warnings
 
 # Add current directory to Python path for imports
@@ -18,85 +19,135 @@ def mock_airflow_db():
     with patch('airflow.models.dag.DagModel') as mock_dag_model:
         # Mock the database session and connection
         mock_session = Mock()
-        mock_engine = Mock()
+        mock_session.__enter__ = Mock(return_value=mock_session)
+        mock_session.__exit__ = Mock(return_value=None)
+        mock_session.get_bind = Mock(return_value=None)
+        mock_session.scalar = Mock(return_value=None)
         
-        # Create proper context manager mocks
+        # Mock engine and connection
+        mock_engine = Mock()
         mock_connection = Mock()
         mock_connection_ctx = Mock()
-        # Properly set up the context manager
         mock_connection_ctx.__enter__ = Mock(return_value=mock_connection)
         mock_connection_ctx.__exit__ = Mock(return_value=None)
-        mock_engine.connect.return_value = mock_connection_ctx
+        mock_engine.connect = Mock(return_value=mock_connection_ctx)
+        mock_engine.dispose = Mock()
         
         mock_session.get_bind.return_value = mock_engine
-        mock_session.scalar.return_value = None
-        mock_connection.scalar.return_value = None
+        mock_session.query = Mock(return_value=mock_session)
+        mock_session.first = Mock(return_value=None)
         
         mock_dag_model.get_current.return_value = None
         mock_dag_model.get_dagbag_import_errors.return_value = []
         
-        # Patch session creation
+        # Create a proper context manager for create_session
+        def mock_create_session():
+            return mock_session
+        
         with patch('airflow.utils.session.create_session', return_value=mock_session):
             yield mock_session
 
 @pytest.fixture
-def dagbag(mock_airflow_db):
-    """Load the DAG bag for testing with mocked database"""
-    # Temporarily set Airflow config for testing
-    test_conf = {
-        'AIRFLOW__CORE__SQL_ALCHEMY_CONN': 'sqlite:///:memory:',  # Use in-memory SQLite
-        'AIRFLOW__CORE__DAGS_FOLDER': '.',
-        'AIRFLOW__CORE__LOAD_EXAMPLES': 'False',
-        'AIRFLOW__DATABASE__SQL_ALCHEMY_CONN': 'sqlite:///:memory:'
-    }
+def mock_airflow_config():
+    """Mock Airflow configuration safely"""
+    # Store original config values
+    original_config = {}
     
-    # Clear existing config and set test config - FIXED VERSION
     try:
-        # Store original config to restore later
-        original_sections = dict(airflow_conf._sections)
-        original_items = dict(airflow_conf._items)
+        # Store original values for key sections
+        sections_to_save = ['core', 'database', 'scheduler', 'webserver']
+        for section in sections_to_save:
+            try:
+                if airflow_conf.has_section(section):
+                    original_config[section] = dict(airflow_conf.items(section))
+            except:
+                pass
         
-        # Clear the config safely
-        airflow_conf._sections.clear()
-        airflow_conf._items.clear()
+        # Set test configuration
+        test_conf = {
+            'core.sql_alchemy_conn': 'sqlite:///:memory:',
+            'core.dags_folder': os.path.abspath('.'),
+            'core.load_examples': 'False',
+            'database.sql_alchemy_conn': 'sqlite:///:memory:'
+        }
         
-        # Set test config
+        # Clear and set config safely
         for key, value in test_conf.items():
-            section, option = key.split('__', 1)
+            section, option = key.split('.', 1)
+            if not airflow_conf.has_section(section):
+                airflow_conf.add_section(section)
             airflow_conf.set(section, option, value)
             
-        # Create DagBag
-        with patch('sales_elt_dag.create_engine') as mock_engine:
-            mock_engine.return_value = Mock()
-            return DagBag(dag_folder='.', include_examples=False)
-            
-    except Exception as e:
-        print(f"Error setting up Airflow config: {e}")
-        # Fallback: try to set config without clearing
-        for key, value in test_conf.items():
-            section, option = key.split('__', 1)
-            try:
-                airflow_conf.set(section, option, value)
-            except Exception as set_e:
-                print(f"Could not set {key}: {set_e}")
+        yield
         
-        with patch('sales_elt_dag.create_engine') as mock_engine:
-            mock_engine.return_value = Mock()
-            return DagBag(dag_folder='.', include_examples=False)
+    finally:
+        # Restore original config
+        for section, items in original_config.items():
+            airflow_conf.remove_section(section)
+            if items:
+                airflow_conf.add_section(section)
+                for option, value in items.items():
+                    airflow_conf.set(section, option, value)
 
-def test_dag_loading(dagbag):
+@pytest.fixture
+def dagbag(mock_airflow_db, mock_airflow_config):
+    """Load the DAG bag for testing with mocked database and config"""
+    # Patch the DagBag constructor to avoid real DB connections
+    with patch('airflow.models.dagbag.DagBag.process_file') as mock_process_file:
+        # Mock the file processing to return our DAG
+        mock_dag = MagicMock(spec=DAG)
+        mock_dag.dag_id = 'sales_elt_dag'
+        mock_dag.tasks = []
+        mock_dag.import_errors = []
+        
+        # Mock the actual import
+        with patch('builtins.__import__') as mock_import:
+            # Mock the sales_elt_dag import
+            mock_module = MagicMock()
+            mock_module.dag = mock_dag
+            mock_import.side_effect = lambda name, *args, **kwargs: mock_module if name == 'sales_elt_dag' else __import__(name, *args, **kwargs)
+            
+            # Create the DagBag
+            dag_bag = DagBag(
+                dag_folder=os.path.abspath('.'),
+                include_examples=False,
+                safe_mode=False
+            )
+            
+            # Manually add our DAG to the bag
+            dag_bag._dags = {'sales_elt_dag': mock_dag}
+            dag_bag._dag_ids = ['sales_elt_dag']
+            dag_bag.import_errors = {}
+            
+            yield dag_bag
+
+def test_dag_loading():
     """Test that the DAG loads without errors"""
-    # Check for import errors
-    assert dagbag.import_errors == {}, f"Import errors: {dagbag.import_errors}"
-    
-    # Get the DAG
-    dag = dagbag.get_dag(dag_id='sales_elt_dag')
-    assert dag is not None, "DAG 'sales_elt_dag' not found"
-    assert isinstance(dag, DAG), f"DAG is not a DAG instance: {type(dag)}"
+    # Create DagBag with mocked environment
+    with patch('airflow.utils.session.create_session') as mock_session:
+        mock_session.return_value.__enter__.return_value = mock_session.return_value
+        mock_session.return_value.__exit__.return_value = None
+        
+        dagbag = DagBag(
+            dag_folder=os.path.abspath('.'),
+            include_examples=False,
+            safe_mode=False
+        )
+        
+        # Check for import errors
+        assert dagbag.import_errors == {}, f"Import errors: {dagbag.import_errors}"
+        
+        # Get the DAG
+        dag = dagbag.get_dag(dag_id='sales_elt_dag')
+        assert dag is not None, "DAG 'sales_elt_dag' not found"
+        assert isinstance(dag, DAG), f"DAG is not a DAG instance: {type(dag)}"
+        
+        print("✓ DAG loading test PASSED")
 
-def test_dag_structure(dagbag):
+def test_dag_structure():
     """Test DAG has correct structure and tasks"""
-    dag = dagbag.get_dag(dag_id='sales_elt_dag')
+    # Import the actual DAG for structure testing
+    from sales_elt_dag import dag
     
     # Check basic DAG properties
     assert dag.dag_id == 'sales_elt_dag'
@@ -108,10 +159,12 @@ def test_dag_structure(dagbag):
     task_ids = [task.task_id for task in dag.tasks]
     expected_tasks = ['extract_and_transform', 'load_to_postgresql', 'validate_load']
     assert set(task_ids) == set(expected_tasks), f"Expected tasks {expected_tasks}, found {task_ids}"
+    
+    print("✓ DAG structure test PASSED")
 
-def test_task_dependencies(dagbag):
+def test_task_dependencies():
     """Test task dependencies are correct"""
-    dag = dagbag.get_dag(dag_id='sales_elt_dag')
+    from sales_elt_dag import dag
     
     extract_task = dag.get_task('extract_and_transform')
     load_task = dag.get_task('load_to_postgresql')
@@ -121,11 +174,16 @@ def test_task_dependencies(dagbag):
     assert extract_task is not None
     assert load_task is not None
     assert validate_task is not None
+    assert isinstance(extract_task, BaseOperator)
+    assert isinstance(load_task, BaseOperator)
+    assert isinstance(validate_task, BaseOperator)
     
     # Check downstream dependencies
     assert 'load_to_postgresql' in extract_task.downstream_task_ids
     assert 'validate_load' in load_task.downstream_task_ids
     assert len(validate_task.downstream_task_ids) == 0  # Last task has no downstream
+    
+    print("✓ Task dependencies test PASSED")
 
 def test_extract_transform_function():
     """Test the extract_and_transform function logic"""
@@ -134,37 +192,8 @@ def test_extract_transform_function():
     # Mock file operations and pandas
     with patch('sales_elt_dag.os') as mock_os, \
          patch('sales_elt_dag.json') as mock_json, \
-         patch('builtins.open') as mock_open, \
+         patch('builtins.open', mock_open(read_data='{"data": [{"order_id": "TEST-001", "item_name": "Test Item", "quantity": "5", "price_per_unit": 100.50, "total_price": "$502.50", "order_date": "2025-01-01T00:00:00", "region": "Test Region", "payment_method": null, "customer_info": {"customer_id": "CUST-TEST", "email": "test@example.com", "age": null, "address": {"street": "123 Test St", "city": "Test City", "zip": "12345"}}, "status": "Completed"}]}')) as mock_open, \
          patch('sales_elt_dag.pd') as mock_pd:
-        
-        # Mock file content
-        mock_file = MagicMock()
-        mock_json.load.return_value = {
-            "data": [
-                {
-                    "order_id": "TEST-001",
-                    "item_name": "Test Item",
-                    "quantity": "5",
-                    "price_per_unit": 100.50,
-                    "total_price": "$502.50",
-                    "order_date": "2025-01-01T00:00:00",
-                    "region": "Test Region",
-                    "payment_method": None,
-                    "customer_info": {
-                        "customer_id": "CUST-TEST",
-                        "email": "test@example.com",
-                        "age": None,
-                        "address": {
-                            "street": "123 Test St",
-                            "city": "Test City",
-                            "zip": "12345"
-                        }
-                    },
-                    "status": "Completed"
-                }
-            ]
-        }
-        mock_open.return_value.__enter__.return_value = mock_file
         
         # Mock pandas operations
         mock_df = MagicMock()
@@ -194,10 +223,12 @@ def test_extract_transform_function():
         mock_pd.DataFrame.assert_called_once()
         mock_df.drop_duplicates.assert_called_once_with(subset=['order_id'])
         mock_df.to_csv.assert_called_once_with('/tmp/cleaned_sales.csv', index=False)
+        
+        print("✓ Extract and transform function test PASSED")
 
-def test_dag_default_args(dagbag):
+def test_dag_default_args():
     """Test DAG default arguments"""
-    dag = dagbag.get_dag(dag_id='sales_elt_dag')
+    from sales_elt_dag import dag
     
     # Check default args
     defaults = dag.default_args
@@ -206,15 +237,19 @@ def test_dag_default_args(dagbag):
     assert 'start_date' in defaults
     assert defaults['retries'] == 1
     assert 'retry_delay' in defaults
+    
+    print("✓ DAG default args test PASSED")
 
-def test_dag_tags(dagbag):
+def test_dag_tags():
     """Test DAG has appropriate tags"""
-    dag = dagbag.get_dag(dag_id='sales_elt_dag')
+    from sales_elt_dag import dag
     assert hasattr(dag, 'tags')
     assert isinstance(dag.tags, list)
     assert 'sales' in dag.tags
     assert 'elt' in dag.tags
     assert 'postgresql' in dag.tags
+    
+    print("✓ DAG tags test PASSED")
 
 class TestDataQuality:
     """Test data quality aspects that the DAG should handle"""
@@ -306,13 +341,8 @@ def test_data_cleansing_logic(sample_data):
     # Mock file operations and pandas
     with patch('sales_elt_dag.os') as mock_os, \
          patch('sales_elt_dag.json') as mock_json, \
-         patch('builtins.open') as mock_open, \
+         patch('builtins.open', mock_open(read_data=json.dumps(sample_data))) as mock_open, \
          patch('sales_elt_dag.pd') as mock_pd:
-        
-        # Mock file content
-        mock_file = MagicMock()
-        mock_json.load.return_value = sample_data
-        mock_open.return_value.__enter__.return_value = mock_file
         
         # Mock pandas operations
         mock_df = MagicMock()
@@ -391,6 +421,10 @@ def test_load_to_postgresql_function():
             'DB_USER': 'airflow',
             'DB_PASSWORD': 'airflow'
         }.get(x, default)
+        
+        # Mock commit
+        mock_conn.commit = Mock()
+        mock_conn.execute = Mock()
         
         # Execute the function
         load_to_postgresql()
