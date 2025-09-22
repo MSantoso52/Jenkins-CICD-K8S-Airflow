@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from airflow import DAG
-from airflow.providers.standard.operators.python import PythonOperator  # Updated import
+from airflow.operators.python import PythonOperator  # Updated import for Airflow 2.4+
 import json
 import pandas as pd
 from sqlalchemy import create_engine, text
@@ -16,7 +16,7 @@ dag = DAG(
         'retry_delay': timedelta(minutes=5),
     },
     description='Sales ELT pipeline with data quality checks',
-    schedule_interval='@daily',
+    schedule='@daily',  # Changed from schedule_interval to schedule
     catchup=False,
     tags=['sales', 'elt', 'postgresql']
 )

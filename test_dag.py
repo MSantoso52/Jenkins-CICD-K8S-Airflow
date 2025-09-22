@@ -12,18 +12,16 @@ sys.path.insert(0, os.path.dirname(__file__))
 @pytest.fixture
 def dagbag():
     """Load the DAG bag for testing"""
-    # Mock the problematic import
-    with patch('sales_elt_dag.PostgresOperator', new=MagicMock()):
-        # Temporarily set Airflow config for testing
-        test_conf = {
-            'AIRFLOW__CORE__SQL_ALCHEMY_CONN': 'postgresql://airflow:airflow@localhost:5432/airflow',
-            'AIRFLOW__CORE__DAGS_FOLDER': '.'
-        }
-        
-        for key, value in test_conf.items():
-            airflow_conf.set('core', key.split('__')[-1], value)
-        
-        return DagBag(dag_folder='.', include_examples=False)
+    # Temporarily set Airflow config for testing
+    test_conf = {
+        'AIRFLOW__CORE__SQL_ALCHEMY_CONN': 'postgresql://airflow:airflow@localhost:5432/airflow',
+        'AIRFLOW__CORE__DAGS_FOLDER': '.'
+    }
+    
+    for key, value in test_conf.items():
+        airflow_conf.set('core', key.split('__')[-1], value)
+    
+    return DagBag(dag_folder='.', include_examples=False)
 
 def test_dag_loading(dagbag):
     """Test that the DAG loads without errors"""
@@ -39,7 +37,7 @@ def test_dag_structure(dagbag):
     # Check basic DAG properties
     assert dag.dag_id == 'sales_elt_dag'
     assert dag.start_date == datetime(2025, 9, 21)
-    assert dag.schedule_interval == '@daily'
+    assert dag.schedule == '@daily'  # Updated to check schedule instead of schedule_interval
     assert len(dag.tasks) == 3, f"Expected 3 tasks, found {len(dag.tasks)}"
     
     # Check task names
