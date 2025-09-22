@@ -270,11 +270,11 @@ def test_extract_transform_function():
             "total_price": "$502.50",
             "order_date": "2025-01-01T00:00:00",
             "region": "Test Region",
-            "payment_method": null,
+            "payment_method": None,
             "customer_info": {
                 "customer_id": "CUST-TEST",
                 "email": "test@example.com",
-                "age": null,
+                "age": None,
                 "address": {
                     "street": "123 Test St",
                     "city": "Test City",
