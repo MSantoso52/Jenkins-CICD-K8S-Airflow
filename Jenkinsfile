@@ -34,7 +34,6 @@ pipeline {
                     // Install Python dependencies
                     sh '''
                         python3 -m pip install --user --upgrade pip --break-system-packages
-                        python3 -m pip uninstall numpy pandas --break-system-packages
                         python3 -m pip install --user numpy==1.24.3 --break-system-packages
                         python3 -m pip install --user pytest==7.4.0 apache-airflow==${AIRFLOW_VERSION} pandas==2.0.3 sqlalchemy psycopg2-binary pytest-mock --break-system-packages
                     '''
