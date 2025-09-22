@@ -355,7 +355,7 @@ def test_dag_tags():
         pytest.skip(f"Could not import DAG: {e}")
     
     assert hasattr(dag, 'tags')
-    assert isinstance(dag.tags, list)
+    assert isinstance(dag.tags, set)
     assert 'sales' in dag.tags
     assert 'elt' in dag.tags
     assert 'postgresql' in dag.tags
