@@ -445,62 +445,62 @@ class TestDataQuality:
             ]
         }
 
-def test_data_cleansing_logic(sample_data):
-    """Test the data cleansing logic separately"""
-    try:
-        from sales_elt_dag import extract_and_transform
-    except ImportError as e:
-        pytest.skip(f"Could not import function: {e}")
-    
-    # Mock file operations and pandas
-    with patch('sales_elt_dag.os') as mock_os, \
-         patch('builtins.open') as mock_file_open, \
-         patch('sales_elt_dag.pd') as mock_pd:
+    def test_data_cleansing_logic(self, sample_data):
+        """Test the data cleansing logic separately"""
+        try:
+            from sales_elt_dag import extract_and_transform
+        except ImportError as e:
+            pytest.skip(f"Could not import function: {e}")
         
-        # Configure the file open mock
-        mock_file_handle = mock_open(read_data=json.dumps(sample_data["data"]))()
-        mock_file_open.return_value.__enter__.return_value = mock_file_handle
-        
-        # Mock pandas operations
-        mock_df = MagicMock()
-        mock_df.drop_duplicates.return_value = mock_df
-        mock_df.to_csv.return_value = None
-        mock_df.dropna.return_value = mock_df
-        mock_df.to_numeric.return_value = mock_df
-        mock_df.astype.return_value = mock_df
-        mock_df.str = MagicMock()
-        mock_df.str.replace.return_value = mock_df
-        mock_df.to_datetime.return_value = mock_df
-        mock_df.fillna.return_value = mock_df
-        mock_df.loc.return_value = mock_df
-        mock_df.__getitem__.return_value = mock_df
-        mock_df.__setitem__.return_value = None
-        # After deduplication and dropping invalid, we expect 2 records
-        mock_df.shape = (2, 15)
-        mock_df.__len__.return_value = 2
-        mock_pd.DataFrame.return_value = mock_df
-        
-        mock_os.path.exists.return_value = True
-        mock_os.getenv.return_value = '/data/sales_record.json'
-        
-        # Execute the function
-        record_count = extract_and_transform()
-        
-        # Verify the transformation steps were called
-        assert mock_pd.DataFrame.called
-        assert mock_df.drop_duplicates.called
-        assert mock_df.to_csv.called
-        assert record_count == 2, f"Expected 2 records after processing, got {record_count}"
-        
-        # Verify data type conversions were attempted
-        assert mock_df.to_numeric.called
-        assert mock_df.astype.called
-        assert mock_df.str.replace.called
-        assert mock_df.to_datetime.called
-        assert mock_df.fillna.called
-        assert mock_df.dropna.called
-        
-        print("✓ Data cleansing tests PASSED")
+        # Mock file operations and pandas
+        with patch('sales_elt_dag.os') as mock_os, \
+             patch('builtins.open') as mock_file_open, \
+             patch('sales_elt_dag.pd') as mock_pd:
+            
+            # Configure the file open mock
+            mock_file_handle = mock_open(read_data=json.dumps(sample_data["data"]))()
+            mock_file_open.return_value.__enter__.return_value = mock_file_handle
+            
+            # Mock pandas operations
+            mock_df = MagicMock()
+            mock_df.drop_duplicates.return_value = mock_df
+            mock_df.to_csv.return_value = None
+            mock_df.dropna.return_value = mock_df
+            mock_df.to_numeric.return_value = mock_df
+            mock_df.astype.return_value = mock_df
+            mock_df.str = MagicMock()
+            mock_df.str.replace.return_value = mock_df
+            mock_df.to_datetime.return_value = mock_df
+            mock_df.fillna.return_value = mock_df
+            mock_df.loc.return_value = mock_df
+            mock_df.__getitem__.return_value = mock_df
+            mock_df.__setitem__.return_value = None
+            # After deduplication and dropping invalid, we expect 2 records
+            mock_df.shape = (2, 15)
+            mock_df.__len__.return_value = 2
+            mock_pd.DataFrame.return_value = mock_df
+            
+            mock_os.path.exists.return_value = True
+            mock_os.getenv.return_value = '/data/sales_record.json'
+            
+            # Execute the function
+            record_count = extract_and_transform()
+            
+            # Verify the transformation steps were called
+            assert mock_pd.DataFrame.called
+            assert mock_df.drop_duplicates.called
+            assert mock_df.to_csv.called
+            assert record_count == 2, f"Expected 2 records after processing, got {record_count}"
+            
+            # Verify data type conversions were attempted
+            assert mock_df.to_numeric.called
+            assert mock_df.astype.called
+            assert mock_df.str.replace.called
+            assert mock_df.to_datetime.called
+            assert mock_df.fillna.called
+            assert mock_df.dropna.called
+            
+            print("✓ Data cleansing tests PASSED")
 
 def test_load_to_postgresql_function():
     """Test the load_to_postgresql function with mocks"""
