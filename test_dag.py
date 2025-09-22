@@ -493,10 +493,10 @@ class TestDataQuality:
             assert record_count == 2, f"Expected 2 records after processing, got {record_count}"
             
             # Verify data type conversions were attempted
-            assert mock_df.to_numeric.called
+            assert mock_pd.to_numeric.called
             assert mock_df.astype.called
             assert mock_df.str.replace.called
-            assert mock_df.to_datetime.called
+            assert mock_pd.to_datetime.called
             assert mock_df.fillna.called
             assert mock_df.dropna.called
             
