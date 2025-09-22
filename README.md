@@ -45,10 +45,10 @@ To follow along this project need to be available & ready on system:
    ```
 7. Prepare Jenkins for CI/CD Pipeline
    * Login to Jenkins
-   * New item <Pipeline-Name>
-   * Select item <Pipeline>
+   * New item -- Pipeline-Name
+   * Select item -- Pipeline
    * Configure
-     * Description <Short-description-of-pipeline>
+     * Description -- Short-description-of-pipeline
      * Triggers -- GitHub hook trigger for GITScm polling
      * Definition -- Pipeline script from SCM
      * SCM -- Git
@@ -60,4 +60,16 @@ To follow along this project need to be available & ready on system:
       * Add webhook
       * Payload URL * -- https://<external_jenkins_url>/github-webhook/
       * Content type * -- Application/json  
-11. Minikube for Airflow on Kubernetes 
+11. Minikube for Airflow on Kubernetes
+    ```bash
+    # Checking active minikube & running
+    kubectl get pods -n elt-pipeline
+    NAME                                     READY   STATUS    RESTARTS          AGE
+    airflow-api-server-5665fc9d59-zt7ls      1/1     Running   53 (24h ago)      14d
+    airflow-dag-processor-64445d467f-nrw4t   2/2     Running   30 (24h ago)      14d
+    airflow-postgresql-0                     1/1     Running   14 (24h ago)      14d
+    airflow-scheduler-748c98ffc6-wt5dw       2/2     Running   39 (24h ago)      14d
+    airflow-statsd-75fdf4bc64-lxt8l          1/1     Running   14 (24h ago)      14d
+    airflow-triggerer-0                      2/2     Running   30 (24h ago)      14d
+    upload-pod                               1/1     Running   149 (8m55s ago)   14d
+    ```
