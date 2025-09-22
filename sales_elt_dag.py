@@ -63,33 +63,37 @@ def extract_and_transform():
                 }
             ]
         }
+        flattened_data = sample_data["data"]
     else:
         # Extract: Read JSON file
         with open(json_file_path, 'r') as f:
             data = json.load(f)
-    
-    if 'sample_data' not in locals():
+        
         print(f"Extracted {len(data)} records from JSON")
         # Flatten: Make nested structures flat
         flattened_data = []
         for record in data:
+            # Bug Fix: Add a check to ensure 'record' is a dictionary before attempting to copy
+            if not isinstance(record, dict):
+                print(f"Warning: Skipping malformed record: {record}")
+                continue
+                
             flat_record = record.copy()
             
             # Flatten customer_info
             if 'customer_info' in flat_record:
                 customer = flat_record.pop('customer_info')
-                flat_record.update(customer)
-                
-                # Flatten address
-                if 'address' in customer:
-                    address = customer['address']
-                    flat_record.update(address)
-                    # Remove address from customer since we flattened it
-                    customer.pop('address', None)
+                if isinstance(customer, dict):
+                    flat_record.update(customer)
+                    
+                    # Flatten address
+                    if 'address' in customer and isinstance(customer['address'], dict):
+                        address = customer['address']
+                        flat_record.update(address)
+                        # Remove address from customer since we flattened it
+                        customer.pop('address', None)
             
             flattened_data.append(flat_record)
-    else:
-        flattened_data = sample_data["data"]
     
     # Convert to DataFrame for easier manipulation
     df = pd.DataFrame(flattened_data)
@@ -292,3 +296,4 @@ validate_task = PythonOperator(
 
 # Set task dependencies
 extract_transform_task >> load_task >> validate_task
+

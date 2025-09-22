@@ -113,8 +113,10 @@ class TestETLFunctions:
         # Mock file reading
         mock_json_data = {
             "data": [
-                {"id": 1, "quantity": 10},
-                {"id": 2, "quantity": 20}
+                {"order_id": 1, "quantity": 10},
+                {"order_id": 2, "quantity": 20},
+                # Add a malformed record to test the fix
+                "malformed_record"
             ]
         }
         mock_file_content = json.dumps(mock_json_data)
