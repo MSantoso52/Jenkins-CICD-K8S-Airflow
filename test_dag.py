@@ -260,11 +260,18 @@ def test_extract_transform_function():
     except ImportError as e:
         pytest.skip(f"Could not import function: {e}")
     
+    # Create the mock data
+    mock_json_data = '{"data": [{"order_id": "TEST-001", "item_name": "Test Item", "quantity": "5", "price_per_unit": 100.50, "total_price": "$502.50", "order_date": "2025-01-01T00:00:00", "region": "Test Region", "payment_method": null, "customer_info": {"customer_id": "CUST-TEST", "email": "test@example.com", "age": null, "address": {"street": "123 Test St", "city": "Test City", "zip": "12345"}}, "status": "Completed"}]}'
+    
     # Mock file operations and pandas
     with patch('sales_elt_dag.os') as mock_os, \
          patch('sales_elt_dag.json') as mock_json, \
-         patch('builtins.open', mock_open(read_data='{"data": [{"order_id": "TEST-001", "item_name": "Test Item", "quantity": "5", "price_per_unit": 100.50, "total_price": "$502.50", "order_date": "2025-01-01T00:00:00", "region": "Test Region", "payment_method": null, "customer_info": {"customer_id": "CUST-TEST", "email": "test@example.com", "age": null, "address": {"street": "123 Test St", "city": "Test City", "zip": "12345"}}, "status": "Completed"}]}')) as mock_open, \
+         patch('builtins.open') as mock_file_open, \
          patch('sales_elt_dag.pd') as mock_pd:
+        
+        # Configure the file open mock
+        mock_file_handle = mock_open(read_data=mock_json_data)
+        mock_file_open.return_value.__enter__.return_value = mock_file_handle()
         
         # Mock pandas operations
         mock_df = MagicMock()
@@ -290,7 +297,7 @@ def test_extract_transform_function():
         
         # Assertions
         assert result == 1, "Extract and transform should return record count of 1"
-        mock_open.assert_called_once_with('/data/sales_record.json', 'r')
+        mock_file_open.assert_called_once_with('/data/sales_record.json', 'r')
         mock_pd.DataFrame.assert_called_once()
         mock_df.drop_duplicates.assert_called_once_with(subset=['order_id'])
         mock_df.to_csv.assert_called_once_with('/tmp/cleaned_sales.csv', index=False)
@@ -425,8 +432,12 @@ def test_data_cleansing_logic(sample_data):
     # Mock file operations and pandas
     with patch('sales_elt_dag.os') as mock_os, \
          patch('sales_elt_dag.json') as mock_json, \
-         patch('builtins.open', mock_open(read_data=json.dumps(sample_data))) as mock_open, \
+         patch('builtins.open') as mock_file_open, \
          patch('sales_elt_dag.pd') as mock_pd:
+        
+        # Configure the file open mock
+        mock_file_handle = mock_open(read_data=json.dumps(sample_data))
+        mock_file_open.return_value.__enter__.return_value = mock_file_handle()
         
         # Mock pandas operations
         mock_df = MagicMock()
