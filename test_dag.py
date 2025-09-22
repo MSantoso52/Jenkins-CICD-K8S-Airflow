@@ -21,7 +21,13 @@ def mock_airflow_db():
         mock_connection = Mock()
         mock_connection.execute.return_value = Mock()
         mock_connection.scalar.return_value = None  # No current DAG in DB
-        mock_engine.connect.return_value.__enter__.return_value = mock_connection
+        
+        # Fix: Properly mock the connection context manager
+        mock_connection_ctx = Mock()
+        mock_connection_ctx.__enter__.return_value = mock_connection
+        mock_connection_ctx.__exit__.return_value = None
+        mock_engine.connect.return_value = mock_connection_ctx
+        
         mock_session.get_bind.return_value = mock_engine
         mock_session.scalar.return_value = None
         
@@ -336,8 +342,11 @@ def test_load_to_postgresql_function():
         
         # Mock database engine and connection
         mock_conn = MagicMock()
+        mock_conn_ctx = Mock()
+        mock_conn_ctx.__enter__.return_value = mock_conn
+        mock_conn_ctx.__exit__.return_value = None
         mock_engine_instance = MagicMock()
-        mock_engine_instance.connect.return_value.__enter__.return_value = mock_conn
+        mock_engine_instance.connect.return_value = mock_conn_ctx
         mock_engine.return_value = mock_engine_instance
         
         # Mock file operations
@@ -371,8 +380,11 @@ def test_validate_load_function():
         
         # Mock database engine and connection
         mock_conn = MagicMock()
+        mock_conn_ctx = Mock()
+        mock_conn_ctx.__enter__.return_value = mock_conn
+        mock_conn_ctx.__exit__.return_value = None
         mock_engine_instance = MagicMock()
-        mock_engine_instance.connect.return_value.__enter__.return_value = mock_conn
+        mock_engine_instance.connect.return_value = mock_conn_ctx
         mock_engine.return_value = mock_engine_instance
         
         # Mock query results - successful validation
