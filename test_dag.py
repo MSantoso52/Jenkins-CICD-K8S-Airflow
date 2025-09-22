@@ -18,8 +18,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 def mock_airflow_db():
     """Comprehensive mock for Airflow's database connections"""
     with patch('airflow.models.dag.DagModel') as mock_dag_model, \
-         patch('airflow.models.dagbag.DagModel') as mock_dagbag_model, \
-         patch('airflow.models.dagrun.DagRun') as mock_dagrun:
+         patch('airflow.models.dagbag.DagBag') as mock_dag_bag:  # Fixed: patch DagBag instead of DagModel
         
         # Mock DagModel completely
         mock_dag_model_instance = MagicMock()
@@ -28,13 +27,6 @@ def mock_airflow_db():
         
         mock_dag_model.get_current.return_value = mock_dag_model_instance
         mock_dag_model.get_dagbag_import_errors.return_value = []
-        
-        # Mock DagBag model
-        mock_dagbag_model_instance = MagicMock()
-        mock_dagbag_model_instance.last_expired = None
-        mock_dagbag_model_instance.last_loaded = None
-        
-        mock_dagbag_model.get_current.return_value = mock_dagbag_model_instance
         
         # Mock database session
         mock_session = MagicMock()
@@ -165,8 +157,7 @@ def test_dag_loading():
     """Test that the DAG loads without errors"""
     # Create DagBag with comprehensive mocking
     with patch('airflow.utils.session.create_session') as mock_session, \
-         patch('airflow.models.dag.DagModel') as mock_dag_model, \
-         patch('airflow.models.dagbag.DagModel') as mock_dagbag_model:
+         patch('airflow.models.dag.DagModel') as mock_dag_model:  # Fixed: only patch dag.DagModel
         
         # Setup mocks
         mock_session.return_value.__enter__.return_value = mock_session.return_value
@@ -177,11 +168,6 @@ def test_dag_loading():
         mock_dag_model_instance.last_loaded = None
         mock_dag_model.get_current.return_value = mock_dag_model_instance
         mock_dag_model.get_dagbag_import_errors.return_value = []
-        
-        mock_dagbag_model_instance = MagicMock()
-        mock_dagbag_model_instance.last_expired = None
-        mock_dagbag_model_instance.last_loaded = None
-        mock_dagbag_model.get_current.return_value = mock_dagbag_model_instance
         
         # Mock the import
         with patch('builtins.__import__') as mock_import:
