@@ -22,8 +22,9 @@ def mock_airflow_db():
         # Create proper context manager mocks
         mock_connection = Mock()
         mock_connection_ctx = Mock()
-        mock_connection_ctx.__enter__.return_value = mock_connection
-        mock_connection_ctx.__exit__.return_value = None
+        # Properly set up the context manager
+        mock_connection_ctx.__enter__ = Mock(return_value=mock_connection)
+        mock_connection_ctx.__exit__ = Mock(return_value=None)
         mock_engine.connect.return_value = mock_connection_ctx
         
         mock_session.get_bind.return_value = mock_engine
@@ -150,6 +151,7 @@ def test_extract_transform_function():
         mock_df.dropna.return_value = mock_df
         mock_df.to_numeric.return_value = mock_df
         mock_df.astype.return_value = mock_df
+        mock_df.str.return_value = MagicMock()
         mock_df.str.replace.return_value = mock_df
         mock_df.to_datetime.return_value = mock_df
         mock_df.fillna.return_value = mock_df
@@ -297,6 +299,7 @@ def test_data_cleansing_logic(sample_data):
         mock_df.dropna.return_value = mock_df
         mock_df.to_numeric.return_value = mock_df
         mock_df.astype.return_value = mock_df
+        mock_df.str = MagicMock()
         mock_df.str.replace.return_value = mock_df
         mock_df.to_datetime.return_value = mock_df
         mock_df.fillna.return_value = mock_df
@@ -346,8 +349,8 @@ def test_load_to_postgresql_function():
         # Mock database engine and connection
         mock_conn = MagicMock()
         mock_conn_ctx = MagicMock()
-        mock_conn_ctx.__enter__.return_value = mock_conn
-        mock_conn_ctx.__exit__.return_value = None
+        mock_conn_ctx.__enter__ = Mock(return_value=mock_conn)
+        mock_conn_ctx.__exit__ = Mock(return_value=None)
         mock_engine_instance = MagicMock()
         mock_engine_instance.connect.return_value = mock_conn_ctx
         mock_engine.return_value = mock_engine_instance
@@ -389,8 +392,8 @@ def test_validate_load_function():
         # Mock database engine and connection
         mock_conn = MagicMock()
         mock_conn_ctx = MagicMock()
-        mock_conn_ctx.__enter__.return_value = mock_conn
-        mock_conn_ctx.__exit__.return_value = None
+        mock_conn_ctx.__enter__ = Mock(return_value=mock_conn)
+        mock_conn_ctx.__exit__ = Mock(return_value=None)
         mock_engine_instance = MagicMock()
         mock_engine_instance.connect.return_value = mock_conn_ctx
         mock_engine.return_value = mock_engine_instance
