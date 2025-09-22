@@ -1,6 +1,7 @@
-from datetime import datetime
+from datetime import datetime, timedelta  # Fixed: Import timedelta separately
 from airflow import DAG
-from airflow.operators.python import PythonOperator
+from airflow.providers.postgres.operators.postgres import PostgresOperator  # Fixed: Use provider version
+from airflow.operators.python import PythonOperator  # Keep for backward compatibility if needed
 import json
 import pandas as pd
 from sqlalchemy import create_engine, text
@@ -10,7 +11,7 @@ default_args = {
     'owner': 'MSantoso52',
     'start_date': datetime(2025, 9, 21),
     'retries': 1,
-    'retry_delay': datetime.timedelta(minutes=5),
+    'retry_delay': timedelta(minutes=5),  # Fixed: Use timedelta from import
 }
 
 dag = DAG(
@@ -71,7 +72,8 @@ def extract_and_transform():
     df['price_per_unit'] = pd.to_numeric(df['price_per_unit'], errors='coerce')
     
     # Clean total_price (remove $ and convert to float)
-    df['total_price'] = df['total_price'].astype(str).str.replace('[\$,]', '', regex=True)
+    # Fixed: Use raw string or proper escape sequence
+    df['total_price'] = df['total_price'].astype(str).str.replace(r'[\$,]', '', regex=True)
     df['total_price'] = pd.to_numeric(df['total_price'], errors='coerce')
     
     # Convert order_date to datetime
@@ -121,7 +123,7 @@ def load_to_postgresql():
     db_password = os.getenv('AIRFLOW__CORE__SQL_ALCHEMY_CONN_PASSWORD', 'airflow')
     
     # Alternative: Use Airflow connection (recommended)
-    # from airflow.hooks.postgres_hook import PostgresHook
+    # from airflow.providers.postgres.hooks.postgres import PostgresHook
     # hook = PostgresHook(postgres_conn_id='postgresql_default')
     # conn = hook.get_conn()
     
