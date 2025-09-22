@@ -1,7 +1,7 @@
 import pytest
 import sys
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 from unittest.mock import patch, MagicMock, Mock, mock_open, PropertyMock
 from airflow.models import DagBag
 from airflow.configuration import conf as airflow_conf
@@ -106,7 +106,8 @@ def mock_dag_import():
     mock_dag.tasks = []
     mock_dag.import_errors = []
     mock_dag.last_loaded = datetime.now()
-    mock_dag.default_args = {'owner': 'MSantoso52', 'start_date': datetime(2025, 9, 21)}
+    # Fix: Use timezone-aware datetime to match Airflow's behavior
+    mock_dag.default_args = {'owner': 'MSantoso52', 'start_date': datetime(2025, 9, 21, tzinfo=timezone.utc)}
     mock_dag.tags = ['sales', 'elt', 'postgresql']
     mock_dag.schedule = '@daily'
     mock_dag.catchup = False
@@ -213,7 +214,9 @@ def test_dag_structure():
     
     # Check basic DAG properties
     assert dag.dag_id == 'sales_elt_dag'
-    assert dag.start_date == datetime(2025, 9, 21)
+    # Fix: Compare timezone-aware datetimes or use date comparison
+    expected_start_date = datetime(2025, 9, 21, tzinfo=timezone.utc)
+    assert dag.start_date == expected_start_date, f"Expected {expected_start_date}, got {dag.start_date}"
     assert dag.schedule == '@daily'
     assert len(dag.tasks) == 3, f"Expected 3 tasks, found {len(dag.tasks)}"
     
@@ -306,6 +309,9 @@ def test_dag_default_args():
     assert 'owner' in defaults
     assert defaults['owner'] == 'MSantoso52'
     assert 'start_date' in defaults
+    # Fix: Make the comparison timezone-aware
+    expected_start_date = datetime(2025, 9, 21, tzinfo=timezone.utc)
+    assert defaults['start_date'] == expected_start_date
     assert defaults['retries'] == 1
     assert 'retry_delay' in defaults
     
