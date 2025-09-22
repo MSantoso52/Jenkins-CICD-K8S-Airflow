@@ -235,3 +235,4 @@ class TestLoadFunctions:
         with pytest.raises(ValueError, match="Data quality validation failed"):
             validate_load()
 
+
