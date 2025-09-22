@@ -2,7 +2,7 @@ import pytest
 import sys
 import os
 from datetime import datetime
-from unittest.mock import patch, MagicMock, Mock, mock_open
+from unittest.mock import patch, MagicMock, Mock, mock_open, PropertyMock
 from airflow.models import DagBag
 from airflow.configuration import conf as airflow_conf
 from airflow.models.dag import DAG
@@ -184,8 +184,8 @@ def dagbag(mock_airflow_db, mock_airflow_config, mock_dag_import):
             mock_get_dag_bound = mock_get_dag.__get__(dag_bag, DagBag)
             dag_bag.get_dag = mock_get_dag_bound
             
-            # Mock the dag_ids property
-            dag_bag.dag_ids = [mock_dag.dag_id]
+            # Mock the dag_ids property using PropertyMock
+            type(dag_bag).dag_ids = PropertyMock(return_value=[mock_dag.dag_id])
             
             yield dag_bag
 
