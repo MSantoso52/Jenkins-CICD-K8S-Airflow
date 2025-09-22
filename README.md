@@ -73,3 +73,25 @@ To follow along this project need to be available & ready on system:
     airflow-triggerer-0                      2/2     Running   30 (24h ago)      14d
     upload-pod                               1/1     Running   149 (8m55s ago)   14d
     ```
+12. Jenkins build
+    ```jenkins log
+    + python3 -m pytest test_dag.py -v --tb=short -x --junitxml=target/pytest/test-results.xml
+      ============================= test session starts ==============================
+      platform linux -- Python 3.11.2, pytest-7.4.0, pluggy-1.6.0 -- /usr/bin/python3
+      cachedir: .pytest_cache
+      rootdir: /var/jenkins_home/workspace/sales-dag-pipeline
+      plugins: mock-3.15.1, anyio-4.10.0
+      collecting ... collected 8 items
+
+      test_dag.py::TestDagIntegrity::test_dag_loading PASSED                   [ 12%]
+      test_dag.py::TestDagIntegrity::test_dag_structure PASSED                 [ 25%]
+      test_dag.py::TestDagIntegrity::test_task_dependencies PASSED             [ 37%]
+      test_dag.py::TestDagIntegrity::test_dag_default_args PASSED              [ 50%]
+      test_dag.py::TestDagIntegrity::test_dag_tags PASSED                      [ 62%]
+      test_dag.py::TestETLFunctions::test_extract_transform_function PASSED    [ 75%]
+      test_dag.py::TestLoadFunctions::test_load_to_postgresql PASSED           [ 87%]
+      test_dag.py::TestLoadFunctions::test_validate_load PASSED                [100%]
+
+      - generated xml file: /var/jenkins_home/workspace/sales-dag-pipeline/target/pytest/test-results.xml -
+      ============================== 8 passed in 3.09s ===============================
+    ```
