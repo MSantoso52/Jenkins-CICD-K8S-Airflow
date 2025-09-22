@@ -74,12 +74,12 @@ print(f'✓ JSON valid with {len(data)} records')
                     // Archive test results
                     junit 'target/pytest/test-results.xml'
                     publishHTML([
-                        allowMissing: false, [cite: 17]
-                        alwaysLinkToLastBuild: true, [cite: 17]
-                        keepAll: true, [cite: 17]
-                        reportDir: 'target/pytest', [cite: 17]
-                        reportFiles: 'index.html', [cite: 18]
-                        reportName: 'DAG Test Report' [cite: 18]
+                      allowMissing: false,
+                      alwaysLinkToLastBuild: true,
+                      keepAll: true,
+                      reportDir: 'target/pytest',
+                      reportFiles: 'index.html',
+                      reportName: 'DAG Test Report'
                     ])
                 }
                 failure {
