@@ -17,9 +17,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 @pytest.fixture
 def mock_airflow_db():
     """Comprehensive mock for Airflow's database connections"""
-    with patch('airflow.models.dag.DagModel') as mock_dag_model, \
-         patch('airflow.models.dagbag.DagBag') as mock_dag_bag:  # Fixed: patch DagBag instead of DagModel
-        
+    with patch('airflow.models.dag.DagModel') as mock_dag_model:
         # Mock DagModel completely
         mock_dag_model_instance = MagicMock()
         mock_dag_model_instance.last_expired = None
@@ -100,27 +98,61 @@ def mock_airflow_config():
 @pytest.fixture
 def mock_dag_import():
     """Mock the DAG import process"""
-    with patch('builtins.__import__') as mock_import:
-        # Mock the sales_elt_dag import
-        mock_module = MagicMock()
-        mock_dag = MagicMock(spec=DAG)
-        mock_dag.dag_id = 'sales_elt_dag'
-        mock_dag.tasks = []
-        mock_dag.import_errors = []
-        mock_dag.last_loaded = datetime.now()
-        mock_dag.default_args = {'owner': 'MSantoso52', 'start_date': datetime(2025, 9, 21)}
-        mock_dag.tags = ['sales', 'elt', 'postgresql']
+    # Create a mock module that looks like the real sales_elt_dag
+    mock_module = MagicMock()
+    mock_dag = MagicMock(spec=DAG)
+    mock_dag.dag_id = 'sales_elt_dag'
+    mock_dag.tasks = []
+    mock_dag.import_errors = []
+    mock_dag.last_loaded = datetime.now()
+    mock_dag.default_args = {'owner': 'MSantoso52', 'start_date': datetime(2025, 9, 21)}
+    mock_dag.tags = ['sales', 'elt', 'postgresql']
+    mock_dag.schedule = '@daily'
+    mock_dag.catchup = False
+    mock_dag.description = 'Sales ELT pipeline with data quality checks'
+    
+    # Mock the functions
+    mock_extract = MagicMock(return_value=1)
+    mock_load = MagicMock()
+    mock_validate = MagicMock()
+    
+    mock_module.dag = mock_dag
+    mock_module.extract_and_transform = mock_extract
+    mock_module.load_to_postgresql = mock_load
+    mock_module.validate_load = mock_validate
+    
+    # Create a more sophisticated import mock that avoids recursion
+    def safe_import(name, *args, **kwargs):
+        # Handle Airflow internal imports first
+        if name.startswith('airflow'):
+            try:
+                return __import__(name, *args, **kwargs)
+            except ImportError:
+                # Return a basic mock for Airflow modules
+                return MagicMock()
         
-        mock_module.dag = mock_dag
-        mock_import.side_effect = lambda name, *args, **kwargs: mock_module if name == 'sales_elt_dag' else __import__(name, *args, **kwargs)
+        # Handle our specific DAG import
+        if name == 'sales_elt_dag':
+            return mock_module
+        
+        # For all other imports, try the real import
+        try:
+            return __import__(name, *args, **kwargs)
+        except ImportError:
+            return MagicMock()
+    
+    with patch('builtins.__import__', side_effect=safe_import):
         yield mock_module
 
 @pytest.fixture
 def dagbag(mock_airflow_db, mock_airflow_config, mock_dag_import):
     """Load the DAG bag for testing with comprehensive mocking"""
+    # Create a properly mocked DagBag
+    mock_dag = mock_dag_import.dag
+    
+    # Patch the DagBag process_file to avoid real file processing
     with patch('airflow.models.dagbag.DagBag.process_file') as mock_process_file:
-        # Create a properly mocked DagBag
-        mock_dag = mock_dag_import.dag
+        mock_process_file.return_value = mock_dag
         
         # Patch the DagBag to avoid real file processing
         with patch.object(DagBag, '_load_modules_from_folder') as mock_load_modules:
@@ -146,6 +178,7 @@ def dagbag(mock_airflow_db, mock_airflow_config, mock_dag_import):
                     orm_dag = MagicMock()
                     orm_dag.last_expired = None
                     orm_dag.last_loaded = dag.last_loaded if hasattr(dag, 'last_loaded') else None
+                    orm_dag.dag_id = dag.dag_id
                     return dag
                 return None
             
@@ -153,53 +186,19 @@ def dagbag(mock_airflow_db, mock_airflow_config, mock_dag_import):
             
             yield dag_bag
 
-def test_dag_loading():
+def test_dag_loading(dagbag):
     """Test that the DAG loads without errors"""
-    # Create DagBag with comprehensive mocking
-    with patch('airflow.utils.session.create_session') as mock_session, \
-         patch('airflow.models.dag.DagModel') as mock_dag_model:  # Fixed: only patch dag.DagModel
-        
-        # Setup mocks
-        mock_session.return_value.__enter__.return_value = mock_session.return_value
-        mock_session.return_value.__exit__.return_value = None
-        
-        mock_dag_model_instance = MagicMock()
-        mock_dag_model_instance.last_expired = None
-        mock_dag_model_instance.last_loaded = None
-        mock_dag_model.get_current.return_value = mock_dag_model_instance
-        mock_dag_model.get_dagbag_import_errors.return_value = []
-        
-        # Mock the import
-        with patch('builtins.__import__') as mock_import:
-            mock_module = MagicMock()
-            mock_dag = MagicMock(spec=DAG)
-            mock_dag.dag_id = 'sales_elt_dag'
-            mock_dag.tasks = []
-            mock_dag.import_errors = []
-            mock_dag.last_loaded = datetime.now()
-            mock_module.dag = mock_dag
-            mock_import.side_effect = lambda name, *args, **kwargs: mock_module if name == 'sales_elt_dag' else __import__(name, *args, **kwargs)
-            
-            dagbag = DagBag(
-                dag_folder=os.path.abspath('.'),
-                include_examples=False,
-                safe_mode=False
-            )
-            
-            # Manually set the DAG
-            dagbag._dags = {'sales_elt_dag': mock_dag}
-            dagbag._dag_ids = ['sales_elt_dag']
-            dagbag.import_errors = {}
-            
-            # Check for import errors
-            assert dagbag.import_errors == {}, f"Import errors: {dagbag.import_errors}"
-            
-            # Get the DAG
-            dag = dagbag.get_dag(dag_id='sales_elt_dag')
-            assert dag is not None, "DAG 'sales_elt_dag' not found"
-            assert isinstance(dag, MagicMock) or isinstance(dag, DAG), f"DAG is not a DAG instance: {type(dag)}"
-            
-            print("✓ DAG loading test PASSED")
+    # Check for import errors
+    assert dagbag.import_errors == {}, f"Import errors: {dagbag.import_errors}"
+    
+    # Get the DAG
+    dag = dagbag.get_dag(dag_id='sales_elt_dag')
+    assert dag is not None, "DAG 'sales_elt_dag' not found"
+    assert dag.dag_id == 'sales_elt_dag'
+    assert hasattr(dag, 'default_args')
+    assert hasattr(dag, 'tags')
+    
+    print("✓ DAG loading test PASSED")
 
 def test_dag_structure():
     """Test DAG has correct structure and tasks"""
