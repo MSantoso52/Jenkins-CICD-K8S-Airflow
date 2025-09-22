@@ -260,18 +260,39 @@ def test_extract_transform_function():
     except ImportError as e:
         pytest.skip(f"Could not import function: {e}")
     
-    # Create the mock data
-    mock_json_data = '{"data": [{"order_id": "TEST-001", "item_name": "Test Item", "quantity": "5", "price_per_unit": 100.50, "total_price": "$502.50", "order_date": "2025-01-01T00:00:00", "region": "Test Region", "payment_method": null, "customer_info": {"customer_id": "CUST-TEST", "email": "test@example.com", "age": null, "address": {"street": "123 Test St", "city": "Test City", "zip": "12345"}}, "status": "Completed"}]}'
+    # Create the mock data as a list
+    mock_json_data = json.dumps([
+        {
+            "order_id": "TEST-001",
+            "item_name": "Test Item",
+            "quantity": "5",
+            "price_per_unit": 100.50,
+            "total_price": "$502.50",
+            "order_date": "2025-01-01T00:00:00",
+            "region": "Test Region",
+            "payment_method": null,
+            "customer_info": {
+                "customer_id": "CUST-TEST",
+                "email": "test@example.com",
+                "age": null,
+                "address": {
+                    "street": "123 Test St",
+                    "city": "Test City",
+                    "zip": "12345"
+                }
+            },
+            "status": "Completed"
+        }
+    ])
     
     # Mock file operations and pandas
     with patch('sales_elt_dag.os') as mock_os, \
-         patch('sales_elt_dag.json') as mock_json, \
          patch('builtins.open') as mock_file_open, \
          patch('sales_elt_dag.pd') as mock_pd:
         
         # Configure the file open mock
-        mock_file_handle = mock_open(read_data=mock_json_data)
-        mock_file_open.return_value.__enter__.return_value = mock_file_handle()
+        mock_file_handle = mock_open(read_data=mock_json_data)()
+        mock_file_open.return_value.__enter__.return_value = mock_file_handle
         
         # Mock pandas operations
         mock_df = MagicMock()
@@ -285,6 +306,8 @@ def test_extract_transform_function():
         mock_df.to_datetime.return_value = mock_df
         mock_df.fillna.return_value = mock_df
         mock_df.loc.return_value = mock_df
+        mock_df.__getitem__.return_value = mock_df
+        mock_df.__setitem__.return_value = None
         mock_df.shape = (1, 15)
         mock_df.__len__.return_value = 1
         mock_pd.DataFrame.return_value = mock_df
@@ -431,13 +454,12 @@ def test_data_cleansing_logic(sample_data):
     
     # Mock file operations and pandas
     with patch('sales_elt_dag.os') as mock_os, \
-         patch('sales_elt_dag.json') as mock_json, \
          patch('builtins.open') as mock_file_open, \
          patch('sales_elt_dag.pd') as mock_pd:
         
         # Configure the file open mock
-        mock_file_handle = mock_open(read_data=json.dumps(sample_data))
-        mock_file_open.return_value.__enter__.return_value = mock_file_handle()
+        mock_file_handle = mock_open(read_data=json.dumps(sample_data["data"]))()
+        mock_file_open.return_value.__enter__.return_value = mock_file_handle
         
         # Mock pandas operations
         mock_df = MagicMock()
@@ -451,9 +473,11 @@ def test_data_cleansing_logic(sample_data):
         mock_df.to_datetime.return_value = mock_df
         mock_df.fillna.return_value = mock_df
         mock_df.loc.return_value = mock_df
-        # After deduplication, we should have 3 unique records (4 total - 1 duplicate)
-        mock_df.shape = (3, 15)
-        mock_df.__len__.return_value = 3
+        mock_df.__getitem__.return_value = mock_df
+        mock_df.__setitem__.return_value = None
+        # After deduplication and dropping invalid, we expect 2 records
+        mock_df.shape = (2, 15)
+        mock_df.__len__.return_value = 2
         mock_pd.DataFrame.return_value = mock_df
         
         mock_os.path.exists.return_value = True
@@ -466,7 +490,7 @@ def test_data_cleansing_logic(sample_data):
         assert mock_pd.DataFrame.called
         assert mock_df.drop_duplicates.called
         assert mock_df.to_csv.called
-        assert record_count == 3, f"Expected 3 records after processing, got {record_count}"
+        assert record_count == 2, f"Expected 2 records after processing, got {record_count}"
         
         # Verify data type conversions were attempted
         assert mock_df.to_numeric.called
