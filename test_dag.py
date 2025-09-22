@@ -7,6 +7,7 @@ from airflow.models import DagBag
 from airflow.configuration import conf as airflow_conf
 from airflow.models.dag import DAG
 from airflow.models.baseoperator import BaseOperator
+import warnings
 
 # Add current directory to Python path for imports
 sys.path.insert(0, os.path.dirname(__file__))
@@ -49,18 +50,39 @@ def dagbag(mock_airflow_db):
         'AIRFLOW__DATABASE__SQL_ALCHEMY_CONN': 'sqlite:///:memory:'
     }
     
-    # Clear existing config and set test config
-    for section in list(airflow_conf.keys()):
-        del airflow_conf._sections[section]
-    
-    for key, value in test_conf.items():
-        section, option = key.split('__', 1)
-        airflow_conf.set(section, option, value)
-    
-    # Mock the database-related imports in the DAG file
-    with patch('sales_elt_dag.create_engine') as mock_engine:
-        mock_engine.return_value = Mock()
-        return DagBag(dag_folder='.', include_examples=False)
+    # Clear existing config and set test config - FIXED VERSION
+    try:
+        # Store original config to restore later
+        original_sections = dict(airflow_conf._sections)
+        original_items = dict(airflow_conf._items)
+        
+        # Clear the config safely
+        airflow_conf._sections.clear()
+        airflow_conf._items.clear()
+        
+        # Set test config
+        for key, value in test_conf.items():
+            section, option = key.split('__', 1)
+            airflow_conf.set(section, option, value)
+            
+        # Create DagBag
+        with patch('sales_elt_dag.create_engine') as mock_engine:
+            mock_engine.return_value = Mock()
+            return DagBag(dag_folder='.', include_examples=False)
+            
+    except Exception as e:
+        print(f"Error setting up Airflow config: {e}")
+        # Fallback: try to set config without clearing
+        for key, value in test_conf.items():
+            section, option = key.split('__', 1)
+            try:
+                airflow_conf.set(section, option, value)
+            except Exception as set_e:
+                print(f"Could not set {key}: {set_e}")
+        
+        with patch('sales_elt_dag.create_engine') as mock_engine:
+            mock_engine.return_value = Mock()
+            return DagBag(dag_folder='.', include_examples=False)
 
 def test_dag_loading(dagbag):
     """Test that the DAG loads without errors"""
@@ -151,7 +173,7 @@ def test_extract_transform_function():
         mock_df.dropna.return_value = mock_df
         mock_df.to_numeric.return_value = mock_df
         mock_df.astype.return_value = mock_df
-        mock_df.str.return_value = MagicMock()
+        mock_df.str = MagicMock()
         mock_df.str.replace.return_value = mock_df
         mock_df.to_datetime.return_value = mock_df
         mock_df.fillna.return_value = mock_df
