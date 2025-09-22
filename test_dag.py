@@ -18,11 +18,9 @@ def mock_airflow_db():
         # Mock the database session and connection
         mock_session = Mock()
         mock_engine = Mock()
-        mock_connection = Mock()
-        mock_connection.execute.return_value = Mock()
-        mock_connection.scalar.return_value = None  # No current DAG in DB
         
-        # Fix: Properly mock the connection context manager
+        # Create proper context manager mocks
+        mock_connection = Mock()
         mock_connection_ctx = Mock()
         mock_connection_ctx.__enter__.return_value = mock_connection
         mock_connection_ctx.__exit__.return_value = None
@@ -30,6 +28,7 @@ def mock_airflow_db():
         
         mock_session.get_bind.return_value = mock_engine
         mock_session.scalar.return_value = None
+        mock_connection.scalar.return_value = None
         
         mock_dag_model.get_current.return_value = None
         mock_dag_model.get_dagbag_import_errors.return_value = []
@@ -156,6 +155,7 @@ def test_extract_transform_function():
         mock_df.fillna.return_value = mock_df
         mock_df.loc.return_value = mock_df
         mock_df.shape = (1, 15)
+        mock_df.__len__.return_value = 1
         mock_pd.DataFrame.return_value = mock_df
         
         mock_os.path.exists.return_value = True
@@ -301,8 +301,9 @@ def test_data_cleansing_logic(sample_data):
         mock_df.to_datetime.return_value = mock_df
         mock_df.fillna.return_value = mock_df
         mock_df.loc.return_value = mock_df
-        # After deduplication, we should have 3 unique records
+        # After deduplication, we should have 3 unique records (4 total - 1 duplicate)
         mock_df.shape = (3, 15)
+        mock_df.__len__.return_value = 3
         mock_pd.DataFrame.return_value = mock_df
         
         mock_os.path.exists.return_value = True
@@ -333,32 +334,38 @@ def test_load_to_postgresql_function():
     
     with patch('sales_elt_dag.os') as mock_os, \
          patch('sales_elt_dag.pd') as mock_pd, \
-         patch('sales_elt_dag.create_engine') as mock_engine:
+         patch('sales_elt_dag.create_engine') as mock_engine, \
+         patch('sales_elt_dag.text') as mock_text:
         
         # Mock the CSV file reading
         mock_df = MagicMock()
         mock_df.shape = (2, 10)
+        mock_df.to_sql.return_value = None
         mock_pd.read_csv.return_value = mock_df
         
         # Mock database engine and connection
         mock_conn = MagicMock()
-        mock_conn_ctx = Mock()
+        mock_conn_ctx = MagicMock()
         mock_conn_ctx.__enter__.return_value = mock_conn
         mock_conn_ctx.__exit__.return_value = None
         mock_engine_instance = MagicMock()
         mock_engine_instance.connect.return_value = mock_conn_ctx
         mock_engine.return_value = mock_engine_instance
         
+        # Mock SQL text objects
+        mock_text_sql = MagicMock()
+        mock_text.return_value = mock_text_sql
+        
         # Mock file operations
         mock_os.path.exists.return_value = True
         mock_os.remove = Mock()
-        mock_os.getenv.side_effect = lambda x, y=None: {
+        mock_os.getenv.side_effect = lambda x, default=None: {
             'DB_HOST': 'localhost',
             'DB_PORT': '5432', 
             'DB_NAME': 'airflow',
             'DB_USER': 'airflow',
             'DB_PASSWORD': 'airflow'
-        }.get(x, y)
+        }.get(x, default)
         
         # Execute the function
         load_to_postgresql()
@@ -376,11 +383,12 @@ def test_validate_load_function():
     from sales_elt_dag import validate_load
     
     with patch('sales_elt_dag.os') as mock_os, \
-         patch('sales_elt_dag.create_engine') as mock_engine:
+         patch('sales_elt_dag.create_engine') as mock_engine, \
+         patch('sales_elt_dag.text') as mock_text:
         
         # Mock database engine and connection
         mock_conn = MagicMock()
-        mock_conn_ctx = Mock()
+        mock_conn_ctx = MagicMock()
         mock_conn_ctx.__enter__.return_value = mock_conn
         mock_conn_ctx.__exit__.return_value = None
         mock_engine_instance = MagicMock()
@@ -395,19 +403,23 @@ def test_validate_load_function():
         mock_negative_result = Mock()
         mock_negative_result.fetchone.return_value = (0,)
         
+        # Mock SQL text objects
+        mock_text_sql = MagicMock()
+        mock_text.return_value = mock_text_sql
+        
         mock_conn.execute.side_effect = [
             mock_count_result,
             mock_null_result,
             mock_negative_result
         ]
         
-        mock_os.getenv.side_effect = lambda x, y=None: {
+        mock_os.getenv.side_effect = lambda x, default=None: {
             'DB_HOST': 'localhost',
             'DB_PORT': '5432', 
             'DB_NAME': 'records_db',
             'DB_USER': 'postgres',
             'DB_PASSWORD': 'postgres'
-        }.get(x, y)
+        }.get(x, default)
         
         # Execute the function
         validate_load()
