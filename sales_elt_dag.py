@@ -1,27 +1,21 @@
-from datetime import datetime, timedelta  # Fixed: Import timedelta separately
+from datetime import datetime, timedelta
 from airflow import DAG
-from airflow.providers.postgres.operators.postgres import PostgresOperator  # Fixed: Use provider version
-from airflow.operators.python import PythonOperator  # Keep for backward compatibility if needed
+from airflow.operators.python import PythonOperator
 import json
 import pandas as pd
 from sqlalchemy import create_engine, text
 import os
 
+# Remove this line since PostgresOperator is not used:
+# from airflow.providers.postgres.operators.postgres import PostgresOperator
+
 default_args = {
     'owner': 'MSantoso52',
     'start_date': datetime(2025, 9, 21),
     'retries': 1,
-    'retry_delay': timedelta(minutes=5),  # Fixed: Use timedelta from import
+    'retry_delay': timedelta(minutes=5),
 }
 
-dag = DAG(
-    'sales_elt_dag',
-    default_args=default_args,
-    description='ELT pipeline for sales records with data cleansing',
-    schedule_interval='@daily',
-    catchup=False,
-    tags=['sales', 'elt', 'postgresql']
-)
 
 def extract_and_transform():
     """Extract JSON and transform/clean the data"""
