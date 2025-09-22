@@ -10,6 +10,7 @@ from airflow.models.baseoperator import BaseOperator
 from airflow.utils.session import create_session
 import warnings
 import json
+import builtins
 
 # Add current directory to Python path for imports
 sys.path.insert(0, os.path.dirname(__file__))
@@ -121,12 +122,15 @@ def mock_dag_import():
     mock_module.load_to_postgresql = mock_load
     mock_module.validate_load = mock_validate
     
+    # Capture the original import
+    original_import = builtins.__import__
+    
     # Create a more sophisticated import mock that avoids recursion
     def safe_import(name, *args, **kwargs):
         # Handle Airflow internal imports first
         if name.startswith('airflow'):
             try:
-                return __import__(name, *args, **kwargs)
+                return original_import(name, *args, **kwargs)
             except ImportError:
                 # Return a basic mock for Airflow modules
                 return MagicMock()
@@ -137,7 +141,7 @@ def mock_dag_import():
         
         # For all other imports, try the real import
         try:
-            return __import__(name, *args, **kwargs)
+            return original_import(name, *args, **kwargs)
         except ImportError:
             return MagicMock()
     
