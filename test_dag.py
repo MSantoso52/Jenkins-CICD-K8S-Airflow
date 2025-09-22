@@ -480,6 +480,25 @@ class TestDataQuality:
             mock_df.__len__.return_value = 2
             mock_pd.DataFrame.return_value = mock_df
             
+            # Fix: Set columns explicitly to simulate the DataFrame structure after flattening
+            mock_df.columns = [
+                "order_id",
+                "item_name",
+                "quantity",
+                "price_per_unit",
+                "total_price",
+                "order_date",
+                "region",
+                "payment_method",
+                "customer_id",
+                "email",
+                "age",
+                "street",
+                "city",
+                "zip",
+                "status"
+            ]
+            
             mock_os.path.exists.return_value = True
             mock_os.getenv.return_value = '/data/sales_record.json'
             
@@ -496,7 +515,7 @@ class TestDataQuality:
             assert mock_pd.to_numeric.called
             assert mock_df.astype.called
             assert mock_df.str.replace.called
-            assert mock_pd.to_datetime.called
+            assert mock_pd.to_datetime.called  # Fix: Change to mock_pd since pd.to_datetime is used
             assert mock_df.fillna.called
             assert mock_df.dropna.called
             
